@@ -1,0 +1,182 @@
+body {
+    box-sizing: border-box;
+}
+.container {
+    display: flex;
+}
+
+/* sidebar */
+.side-bar {
+width: 15vw;
+height: 100vh;
+background-color: rgb(240, 236, 232);
+display: flex;
+flex-direction: column;
+padding: 10px;
+}
+
+.main-right {
+    width: 85vw;
+    height: 100vh;
+}
+
+.side-bar-top {
+    margin-top: 60px;
+}
+
+.side-bar-middle {
+    margin-top: 100px;
+}
+
+.side-bar-headings {
+    height: 40px;
+   
+    display: flex;
+    align-items: center;
+}
+
+.side-bar-items {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.side-bar-items-project  {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.side-bar-items-project-heading {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.add-logo, .add-logo1 {
+    height: 20px;
+    border-radius: 10px;
+    width: 20px;
+    background-color: blue;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+/* main-right section */
+
+.main-right {
+    margin-left: 20px;
+}
+
+.add-task-module {
+    width: 700px;
+    height: 160px;
+    display: flex;
+    flex-direction: column;
+    border: solid;
+    border-width: 1px;
+    padding: 5px;
+}
+
+.task-buttons {
+    display: inline-block;
+    margin-left: 380px;
+}
+
+#todo-name {
+height: 20px;
+width: 692px;
+margin-bottom: 5px;
+
+}
+
+#description {
+    min-height: 90px;
+    max-height: 90px;
+    max-width: 694px;
+    min-width: 694px;
+margin-bottom: 5px;
+
+
+}
+
+#date {
+margin-bottom: 5px;
+height: 20px;
+
+}
+
+#priority {
+margin-bottom: 5px;
+height: 24px;
+
+
+}
+
+#add-task-main {
+cursor: pointer;
+}
+
+.add-new-task {
+    display: flex;
+    align-items: center;
+    
+}
+
+.active {
+    display: none;
+}
+
+.task-content-list, .task-content-box {
+    display: grid;
+    grid-template-columns: 200px 200px 200px 200px;
+    column-gap: 10px;
+    row-gap: 10px;
+    align-items: center;
+}
+
+/* popup styles */
+
+/* Popup Container */
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  /* Hidden Class */
+  .hidden {
+    display: none;
+  }
+  
+  /* Popup Content */
+  .popup-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    width: 300px;
+    text-align: center;
+  }
+  
+  /* Close Button */
+  .close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 24px;
+    cursor: pointer;
+  }
