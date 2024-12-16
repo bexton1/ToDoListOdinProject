@@ -6,6 +6,14 @@ body {
 }
 
 /* sidebar */
+#add-project {
+    cursor: pointer;
+}
+
+.image-plus {
+    height: 40px;
+}
+
 .side-bar {
 width: 15vw;
 height: 100vh;

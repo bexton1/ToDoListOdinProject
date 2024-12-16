@@ -1,5 +1,6 @@
 import { closeProjectModule, sidebarProjectsListeners, toggleProject, flag } from "./DOMinterface";
 import { todoArray, spliceRow, countArrayLength, projectArray, addNewProject } from "./allArrays";
+import myImage from './images/plus.png'
 
 
 export function displayToDoList() {
@@ -65,7 +66,7 @@ const sideBarProjects = document.querySelector('.side-bar-middle')
 sideBarProjects.innerHTML =
                      `<div class="side-bar-items-project-heading">
                     <p>My Projects</p>
-                    <div id="add-project">+</div>
+                    <div id="add-project"><img src='${myImage}' class='image-plus'></div>
                      </div>`
 projectArray.forEach((item, index) => {
     sideBarProjects.innerHTML += 
