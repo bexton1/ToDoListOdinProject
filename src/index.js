@@ -1,6 +1,6 @@
 import "./styles.css";
 import { addToArray } from "./allArrays";
-import { displayToDoList, renderSidebar, sidebarNumberCount} from "./renderHTML";
+import { displayToDoList, projectNumberCount, renderSidebar, sidebarNumberCount} from "./renderHTML";
 import { sidebarInboxLoad, toggleForm, toggleProject } from "./DOMinterface";
 import { loadInbox } from "./loadhomepage";
 
@@ -12,6 +12,7 @@ addEventListener('DOMContentLoaded', () => {
   displayToDoList();
   renderSidebar();
   sidebarNumberCount()
+  projectNumberCount()
   // 3. Access dynamically created elements AFTER loadInbox()
   setupEventListeners();
 });

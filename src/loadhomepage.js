@@ -14,11 +14,11 @@ mainContainer.innerHTML = `    <h2>${heading}</h2>
                 
                 <div class="add-task-module active">
                     <form id="form">
-                        <input type="text" name="" id="todo-name" placeholder="ToDo Name">
+                        <input type="text" name="" id="todo-name" placeholder="ToDo Name" required>
                         <textarea name="" id="description" placeholder="description"></textarea>
                         <div class='flex-container'>
                         <div>
-                         <input type="date" name="" id="date">
+                         <input type="date" name="" id="date" required>
                         <select name="" id="priority">
                             <option value="priority 1">priority 1</option>
                             <option value="priority 2">priority 2</option>

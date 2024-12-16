@@ -1,4 +1,4 @@
-import { displayToDoList, sidebarNumberCount, renderSidebar } from "./renderHTML"
+import { displayToDoList, sidebarNumberCount, renderSidebar, projectNumberCount } from "./renderHTML"
 import { loadArrayStorage, saveList } from "./storage"
 import { flag } from "./DOMinterface"
 
@@ -16,46 +16,56 @@ export function addToArray() {
   const name = inputName.value
   const date = dueDate.value
   const priorityValue = priority.value
+
+  if (flag === null){
+    todoArray.push({
+      name,
+      date,
+      priorityValue
+  })
   
-if (flag === null){
-  todoArray.push({
-    name,
-    date,
-    priorityValue
-})
+  saveList('todoArray', todoArray) // save to LS
+  }
+  else {
+    projectArray[flag].projectArr.push({
+      name,
+      date,
+      priorityValue
+  })
+  saveList('projectArray', projectArray) 
+  }
 
-saveList('todoArray', todoArray) // save to LS
-}
-else {
-  projectArray[flag].projectArr.push({
-    name,
-    date,
-    priorityValue
-
-})
-saveList('projectArray', projectArray) 
-
-}
-   
 
   inputName.value = ''
   dueDate.value = ''
   textDescription.value = ''
 
   sidebarNumberCount() // update number count
+  projectNumberCount() // update proj number count
 }
 
 export function spliceRow (e) {
   const targ = e.target.id // ID corresponds to array index
-  todoArray.splice(targ, 1)
+  if(flag === null) {
+    todoArray.splice(targ, 1)
+    saveList('todoArray', todoArray)// save to local storage
+
+  }
+  else {
+    projectArray[flag].projectArr.splice(targ, 1)
+    saveList('projectArray', projectArray)// save to local storage
+
+  }
+  
   displayToDoList() // update the list
-  saveList('todoArray', todoArray)// save to local storage
   sidebarNumberCount()
+  projectNumberCount() 
+
   }
 
-  export function countArrayLength() {
+  export function countArrayLength(arrays) {
     let sum = 0
-    todoArray.forEach(element => {
+   arrays.forEach(element => {
       sum ++
     });
     return sum
@@ -78,11 +88,9 @@ export function addNewProject(popupContainer) {
       projectNum,
       projectArr: []
    })
-console.log(projectArray)
-//projectArray[0].projectArr.push('hello')
-      saveList('projectArray', projectArray)
-     renderSidebar()
-  popupContainer.classList.add('hidden')
 
-  })
+      saveList('projectArray', projectArray)
+      renderSidebar()
+      popupContainer.classList.add('hidden')
+ })
 }

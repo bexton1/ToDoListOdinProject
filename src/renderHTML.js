@@ -1,19 +1,31 @@
-import { closeProjectModule, sidebarProjectsListeners, toggleProject } from "./DOMinterface";
+import { closeProjectModule, sidebarProjectsListeners, toggleProject, flag } from "./DOMinterface";
 import { todoArray, spliceRow, countArrayLength, projectArray, addNewProject } from "./allArrays";
 
 
 export function displayToDoList() {
     const displayTasks = document.querySelector('.task-content-box')
     let html = ""
-    todoArray.forEach((item, index) => {
-    displayTasks.innerHTML = ''
-       html +=   
-        ` <div>${item.name}</div>
-            <div>${item.date}</div>
-            <div>${item.priorityValue}</div>
-            <div><button class='delete-button' id="${index}">Delete</button></div>
-        `
-    })
+    if (flag === null){
+      todoArray.forEach((item, index) => {
+        displayTasks.innerHTML = ''
+           html +=   
+            ` <div>${item.name}</div>
+                <div>${item.date}</div>
+                <div>${item.priorityValue}</div>
+                <div><button class='delete-button' id="${index}">Delete</button></div>
+            `
+        })
+    } else {
+      projectArray[flag].projectArr.forEach((item, index) => {
+        html +=   
+            ` <div>${item.name}</div>
+                <div>${item.date}</div>
+                <div>${item.priorityValue}</div>
+                <div><button class='delete-button' id="${index}">Delete</button></div>
+            `
+      })
+    }
+   
 
     displayTasks.innerHTML = html
 
@@ -59,14 +71,22 @@ projectArray.forEach((item, index) => {
     sideBarProjects.innerHTML += 
                     `<div class="side-bar-items-project" data-id="${item.projectName}" data-num="${index}">
                     <p>${item.projectName}</p>
-                       <p>${item.projectNum}</p>
+                       <p class="project-num">${item.projectNum}</p>
                     </div>`
 })
 toggleProject() // re add event listeners for adding new projects after updating html
 sidebarProjectsListeners()
+projectNumberCount()
 }
 
 export function sidebarNumberCount () {
   const inboxNums = document.querySelector('#inboxNums')
-  inboxNums.innerHTML = countArrayLength()
+  inboxNums.innerHTML = countArrayLength(todoArray)
+}
+
+export function projectNumberCount() {
+  const projectNumber = document.querySelectorAll('.project-num')
+  projectNumber.forEach((num, index)=> {
+    num.innerHTML = countArrayLength(projectArray[index].projectArr)
+  })
 }
