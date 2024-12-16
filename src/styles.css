@@ -74,19 +74,24 @@ padding: 10px;
     margin-left: 20px;
 }
 
+#form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.flex-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .add-task-module {
     width: 700px;
     height: 160px;
-    display: flex;
-    flex-direction: column;
     border: solid;
     border-width: 1px;
     padding: 5px;
-}
-
-.task-buttons {
-    display: inline-block;
-    margin-left: 380px;
 }
 
 #todo-name {
