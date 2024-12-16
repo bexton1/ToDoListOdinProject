@@ -64,3 +64,7 @@ projectArray.forEach((item) => {
 })
 toggleProject() // re add event listeners for adding new projects after updating html
 }
+
+export function sidebarNumberCount () {
+  
+}

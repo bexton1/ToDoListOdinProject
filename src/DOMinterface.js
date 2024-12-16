@@ -1,4 +1,6 @@
-import { popupHtml, renderSidebar } from "./renderHTML"
+import { setupEventListeners } from "."
+import { loadInbox } from "./loadhomepage"
+import { displayToDoList, popupHtml, renderSidebar } from "./renderHTML"
 import { loadArrayStorage, saveList } from "./storage"
 
 export let projectArray = loadArrayStorage('projectArray')
@@ -42,3 +44,14 @@ export function addNewProject(popupContainer) {
 }
 
 
+
+export function sidebarInboxLoad () {
+    const inboxSidebar = document.querySelector('.side-inbox')
+    inboxSidebar.addEventListener('click', ()=> {
+        loadInbox()
+        renderSidebar()
+        displayToDoList()
+        setupEventListeners()
+    })
+
+}

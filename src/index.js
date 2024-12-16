@@ -1,13 +1,13 @@
 import "./styles.css";
 import { addToArray } from "./todoArray";
 import { displayToDoList, renderSidebar} from "./renderHTML";
-import { toggleForm, toggleProject } from "./DOMinterface";
+import { sidebarInboxLoad, toggleForm, toggleProject } from "./DOMinterface";
 import { loadInbox } from "./loadhomepage";
 
 addEventListener('DOMContentLoaded', () => {
   // 1. Load dynamic HTML
   loadInbox();
-
+  sidebarInboxLoad()
   // 2. Render the lists after loading the inbox
   displayToDoList();
   renderSidebar();
@@ -17,7 +17,7 @@ addEventListener('DOMContentLoaded', () => {
 });
 
 // Function to attach event listeners to dynamic elements
-function setupEventListeners() {
+export function setupEventListeners() {
   // Submit todo form
   const form = document.querySelector('#form');
   if (form) {
