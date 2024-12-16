@@ -1,9 +1,9 @@
 import { setupEventListeners } from "."
 import { loadInbox } from "./loadhomepage"
 import { displayToDoList, popupHtml, renderSidebar } from "./renderHTML"
-import { loadArrayStorage, saveList } from "./storage"
+import { saveList } from "./storage"
+import { projectArray } from "./todoArray"
 
-export let projectArray = loadArrayStorage('projectArray')
 
 
 export function toggleForm(queryName) {

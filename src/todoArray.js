@@ -5,6 +5,8 @@ import { loadArrayStorage, saveList } from "./storage"
 
 export let todoArray = loadArrayStorage('todoArray')
 
+export let projectArray = loadArrayStorage('projectArray')
+
 export function addToArray() {
   const inputName = document.querySelector('#todo-name')
   const textDescription = document.querySelector('#description')

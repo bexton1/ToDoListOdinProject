@@ -1,5 +1,5 @@
-import { addNewProject, closeProjectModule, projectArray, toggleProject } from "./DOMinterface";
-import { todoArray, spliceRow, countArrayLength } from "./todoArray";
+import { addNewProject, closeProjectModule, toggleProject } from "./DOMinterface";
+import { todoArray, spliceRow, countArrayLength, projectArray } from "./todoArray";
 
 
 export function displayToDoList() {
