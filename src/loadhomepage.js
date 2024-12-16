@@ -8,7 +8,7 @@ mainContainer.innerHTML = `    <h2>${heading}</h2>
             
            
             <div class="add-new-task">
-                <div><img class="image-plus" src="${myImage}"></div>
+                <div><img id='add-logo1' class="image-plus" src="${myImage}"></div>
                 <p id="add-task-main">Add Task</p>
             </div>
            

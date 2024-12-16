@@ -12,6 +12,7 @@ body {
 
 .image-plus {
     height: 40px;
+    cursor: pointer;
 }
 
 .side-bar {

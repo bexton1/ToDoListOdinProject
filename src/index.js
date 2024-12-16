@@ -31,7 +31,7 @@ export function setupEventListeners() {
 
   // Toggle form
   const contentBox = document.querySelector('.add-task-module');
-  const formLogo = document.querySelector('.add-logo1');
+  const formLogo = document.querySelector('#add-logo1');
   if (formLogo && contentBox) {
     formLogo.addEventListener('click', () => {
       toggleForm(contentBox);
