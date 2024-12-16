@@ -1,4 +1,4 @@
-import { displayToDoList } from "./renderHTML"
+import { displayToDoList, sidebarNumberCount } from "./renderHTML"
 import { loadArrayStorage, saveList } from "./storage"
 
 
@@ -26,6 +26,8 @@ export function addToArray() {
   inputName.value = ''
   dueDate.value = ''
   textDescription.value = ''
+
+  sidebarNumberCount() // update number count
 }
 
 export function spliceRow (e) {
@@ -33,5 +35,13 @@ export function spliceRow (e) {
   todoArray.splice(targ, 1)
   displayToDoList() // update the list
   saveList('todoArray', todoArray)// save to local storage
+  sidebarNumberCount()
   }
 
+  export function countArrayLength() {
+    let sum = 0
+    todoArray.forEach(element => {
+      sum ++
+    });
+    return sum
+  }

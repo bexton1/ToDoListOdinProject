@@ -1,5 +1,5 @@
 import { addNewProject, closeProjectModule, projectArray, toggleProject } from "./DOMinterface";
-import { todoArray, spliceRow } from "./todoArray";
+import { todoArray, spliceRow, countArrayLength } from "./todoArray";
 
 
 export function displayToDoList() {
@@ -66,5 +66,6 @@ toggleProject() // re add event listeners for adding new projects after updating
 }
 
 export function sidebarNumberCount () {
-  
+  const inboxNums = document.querySelector('#inboxNums')
+  inboxNums.innerHTML = countArrayLength()
 }
