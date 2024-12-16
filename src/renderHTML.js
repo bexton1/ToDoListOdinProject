@@ -65,7 +65,7 @@ export function renderSidebar() {
 const sideBarProjects = document.querySelector('.side-bar-middle')
 sideBarProjects.innerHTML =
                      `<div class="side-bar-items-project-heading">
-                    <p>My Projects</p>
+                    <p class="project-side-heading">My Projects</p>
                     <div id="add-project"><img src='${myImage}' class='image-plus'></div>
                      </div>`
 projectArray.forEach((item, index) => {
