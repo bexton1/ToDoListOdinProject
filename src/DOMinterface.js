@@ -28,10 +28,22 @@ export function closeProjectModule(popupContainer) {
 export function sidebarInboxLoad () {
     const inboxSidebar = document.querySelector('.side-inbox')
     inboxSidebar.addEventListener('click', ()=> {
-        loadInbox()
+        loadInbox('Inbox')
         renderSidebar()
         displayToDoList()
         setupEventListeners()
     })
+}
 
+export function sidebarProjectsListeners() {
+    const allProjects = document.querySelectorAll('.side-bar-items-project')
+    allProjects.forEach((item) => {
+        item.addEventListener('click', (e)=> {
+            const currentTarg = e.currentTarget.dataset.id
+            loadInbox(currentTarg)
+            renderSidebar()
+            displayToDoList()
+            setupEventListeners()
+        })
+    })
 }

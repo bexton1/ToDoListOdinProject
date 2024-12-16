@@ -6,7 +6,7 @@ import { loadInbox } from "./loadhomepage";
 
 addEventListener('DOMContentLoaded', () => {
   // 1. Load dynamic HTML
-  loadInbox();
+  loadInbox('Inbox');
   sidebarInboxLoad()
   // 2. Render the lists after loading the inbox
   displayToDoList();

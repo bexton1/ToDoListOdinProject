@@ -1,4 +1,4 @@
-import { closeProjectModule, toggleProject } from "./DOMinterface";
+import { closeProjectModule, sidebarProjectsListeners, toggleProject } from "./DOMinterface";
 import { todoArray, spliceRow, countArrayLength, projectArray, addNewProject } from "./allArrays";
 
 
@@ -57,12 +57,13 @@ sideBarProjects.innerHTML =
                      </div>`
 projectArray.forEach((item) => {
     sideBarProjects.innerHTML += 
-                    `<div class="side-bar-items-project">
+                    `<div class="side-bar-items-project" data-id="${item.projectName}">
                     <p>${item.projectName}</p>
                        <p>${item.projectNum}</p>
                     </div>`
 })
 toggleProject() // re add event listeners for adding new projects after updating html
+sidebarProjectsListeners()
 }
 
 export function sidebarNumberCount () {

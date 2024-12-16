@@ -1,7 +1,7 @@
 const mainContainer = document.querySelector('.main-right')
 
-export function loadInbox() {
-mainContainer.innerHTML = `    <h2>Inbox</h2>
+export function loadInbox(heading) {
+mainContainer.innerHTML = `    <h2>${heading}</h2>
             <div class="task-content-box "> </div>
             
            
