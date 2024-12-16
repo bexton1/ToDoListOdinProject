@@ -55,9 +55,9 @@ sideBarProjects.innerHTML =
                     <p>My Projects</p>
                     <div id="add-project">+</div>
                      </div>`
-projectArray.forEach((item) => {
+projectArray.forEach((item, index) => {
     sideBarProjects.innerHTML += 
-                    `<div class="side-bar-items-project" data-id="${item.projectName}">
+                    `<div class="side-bar-items-project" data-id="${item.projectName}" data-num="${index}">
                     <p>${item.projectName}</p>
                        <p>${item.projectNum}</p>
                     </div>`

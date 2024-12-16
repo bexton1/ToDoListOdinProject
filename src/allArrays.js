@@ -1,6 +1,6 @@
 import { displayToDoList, sidebarNumberCount, renderSidebar } from "./renderHTML"
 import { loadArrayStorage, saveList } from "./storage"
-
+import { flag } from "./DOMinterface"
 
 
 export let todoArray = loadArrayStorage('todoArray')
@@ -16,14 +16,27 @@ export function addToArray() {
   const name = inputName.value
   const date = dueDate.value
   const priorityValue = priority.value
+  
+if (flag === null){
+  todoArray.push({
+    name,
+    date,
+    priorityValue
+})
 
-   todoArray.push({
-        name,
-        date,
-        priorityValue
-    })
+saveList('todoArray', todoArray) // save to LS
+}
+else {
+  projectArray[flag].projectArr.push({
+    name,
+    date,
+    priorityValue
 
-   saveList('todoArray', todoArray) // save to LS
+})
+saveList('projectArray', projectArray) 
+
+}
+   
 
   inputName.value = ''
   dueDate.value = ''
@@ -62,9 +75,11 @@ export function addNewProject(popupContainer) {
 
   projectArray.push({
       projectName,
-      projectNum
+      projectNum,
+      projectArr: []
    })
-
+console.log(projectArray)
+//projectArray[0].projectArr.push('hello')
       saveList('projectArray', projectArray)
      renderSidebar()
   popupContainer.classList.add('hidden')
