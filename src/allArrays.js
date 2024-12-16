@@ -1,11 +1,11 @@
-import { displayToDoList, sidebarNumberCount } from "./renderHTML"
+import { displayToDoList, sidebarNumberCount, renderSidebar } from "./renderHTML"
 import { loadArrayStorage, saveList } from "./storage"
 
 
 
 export let todoArray = loadArrayStorage('todoArray')
 
-export let projectArray = loadArrayStorage('projectArray')
+
 
 export function addToArray() {
   const inputName = document.querySelector('#todo-name')
@@ -47,3 +47,27 @@ export function spliceRow (e) {
     });
     return sum
   }
+
+
+// project array 
+export let projectArray = loadArrayStorage('projectArray')
+
+export function addNewProject(popupContainer) {
+  const addProject = document.getElementById('add-project-todo')
+
+  addProject.addEventListener('click', () => {
+  const inputValue = document.querySelector('#project-input')
+  const projectName = inputValue.value
+  const projectNum = 1
+
+  projectArray.push({
+      projectName,
+      projectNum
+   })
+
+      saveList('projectArray', projectArray)
+     renderSidebar()
+  popupContainer.classList.add('hidden')
+
+  })
+}

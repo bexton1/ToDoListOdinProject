@@ -1,5 +1,5 @@
 import "./styles.css";
-import { addToArray } from "./todoArray";
+import { addToArray } from "./allArrays";
 import { displayToDoList, renderSidebar, sidebarNumberCount} from "./renderHTML";
 import { sidebarInboxLoad, toggleForm, toggleProject } from "./DOMinterface";
 import { loadInbox } from "./loadhomepage";

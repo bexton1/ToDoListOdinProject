@@ -1,8 +1,7 @@
 import { setupEventListeners } from "."
 import { loadInbox } from "./loadhomepage"
 import { displayToDoList, popupHtml, renderSidebar } from "./renderHTML"
-import { saveList } from "./storage"
-import { projectArray } from "./todoArray"
+
 
 
 
@@ -23,25 +22,6 @@ export function closeProjectModule(popupContainer) {
     })
 }
 
-export function addNewProject(popupContainer) {
-    const addProject = document.getElementById('add-project-todo')
-
-    addProject.addEventListener('click', () => {
-    const inputValue = document.querySelector('#project-input')
-    const projectName = inputValue.value
-    const projectNum = 1
-
-    projectArray.push({
-        projectName,
-        projectNum
-     })
-
-        saveList('projectArray', projectArray)
-       renderSidebar()
-    popupContainer.classList.add('hidden')
-
-    })
-}
 
 
 
