@@ -3,39 +3,47 @@ import { todoArray, spliceRow, countArrayLength, projectArray, addNewProject } f
 import myImage from './images/plus.png'
 
 
+
+
 export function displayToDoList() {
-    const displayTasks = document.querySelector('.task-content-box')
-    let html = ""
-    if (flag === null){
-      todoArray.forEach((item, index) => {
-        displayTasks.innerHTML = ''
-           html +=   
-            ` <div>${item.name}</div>
-                <div>${item.date}</div>
-                <div>${item.priorityValue}</div>
-                <div><button class='delete-button' id="${index}">Delete</button></div>
-            `
-        })
-    } else {
-      projectArray[flag].projectArr.forEach((item, index) => {
-        html +=   
-            ` <div>${item.name}</div>
-                <div>${item.date}</div>
-                <div>${item.priorityValue}</div>
-                <div><button class='delete-button' id="${index}">Delete</button></div>
-            `
-      })
-    }
-   
+  const displayTasks = document.querySelector('.task-content-box')
+  const tasks = getTasksToDisplay()
 
-    displayTasks.innerHTML = html
+  renderTasks(displayTasks, tasks)
+  attachDeleteListeners() // reattach event listeners after rendering html
+}
 
-    deleteToDoItems() // attach (delete) event listeners after updating DOM
+// render tasks to DOM
+function renderTasks(displayTasks, tasks) {
+  displayTasks.innerHTML = ""
+
+  const html = tasks.map((item, index) => createTaskHTML(item, index)).join('')
+  displayTasks.innerHTML = html
+}
+
+//Fetch tasks based on condition (flag)
+function getTasksToDisplay() { 
+  if(flag === null){
+    return todoArray
+  }
+  else {
+    return projectArray[flag].projectArr
+  }
+}
+
+//create task html
+function createTaskHTML(item, index) {
+return `<div>${item.name}</div>
+<div>${item.date}</div>
+<div>${item.priorityValue}</div>
+<div><button class='delete-button' id="${index}">Delete</button></div>`
 }
 
 
 
-function deleteToDoItems () { // delete button event listeners
+
+
+function attachDeleteListeners () { // delete button event listeners
 const spliceItems = document.querySelectorAll('.delete-button')
 spliceItems.forEach((button) => {
     button.addEventListener('click', spliceRow)
