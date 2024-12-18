@@ -1,7 +1,7 @@
 import { setupEventListeners } from "."
 import { loadInbox } from "./loadhomepage"
 import { displayToDoList, popupHtml, renderSidebar } from "./renderHTML"
-import { projectArray } from "./allArrays"
+import { projectArray, spliceRow } from "./allArrays"
 
 
 
@@ -51,4 +51,13 @@ export function sidebarProjectsListeners() {
             
         })
     })
+}
+
+// delete button event listeners
+export function attachDeleteListeners () { 
+  const spliceItems = document.querySelectorAll('.delete-button')
+
+  spliceItems.forEach((button) => {
+      button.addEventListener('click', spliceRow)
+})
 }

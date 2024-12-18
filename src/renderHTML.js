@@ -1,10 +1,10 @@
-import { closeProjectModule, sidebarProjectsListeners, toggleProject, flag } from "./DOMinterface";
-import { todoArray, spliceRow, countArrayLength, projectArray, addNewProject } from "./allArrays";
+import { closeProjectModule, sidebarProjectsListeners, toggleProject, flag, attachDeleteListeners } from "./DOMinterface";
+import { todoArray, countArrayLength, projectArray, addNewProject } from "./allArrays";
 import myImage from './images/plus.png'
 
 
 
-
+//--------------RENDER TODOLIST----------------\\
 export function displayToDoList() {
   const displayTasks = document.querySelector('.task-content-box')
   const tasks = getTasksToDisplay()
@@ -42,51 +42,72 @@ return `<div>${item.name}</div>
 
 
 
+//--------------RENDER PROJECT MODULE----------------\\
+export function popupHtml() {
+  const popupContainer = document.getElementById('popup')
+  popupContainer.innerHTML = renderModulePopupHTML()
+  
+  showPopup(popupContainer)
 
-function attachDeleteListeners () { // delete button event listeners
-const spliceItems = document.querySelectorAll('.delete-button')
-spliceItems.forEach((button) => {
-    button.addEventListener('click', spliceRow)
-})
+  closeProjectModule(popupContainer)// event listener for closing module
+  addNewProject(popupContainer) // event listener for adding a new project 
 }
 
 
-export function popupHtml() { // render project popup module
-const popupContainer = document.getElementById('popup')
-popupContainer.innerHTML = `
-  <div class="popup-content">
+function renderModulePopupHTML() {
+  return `
+    <div class="popup-content">
     <h2>Add Project</h2>
     <hr>
     <input id="project-input"></input>
     <button id="add-project-todo">submit</button> 
     <button id="close-popup-btn">close</button>
   </div>
-`
-popupContainer.classList.remove('hidden')
+  `
+}
 
-closeProjectModule(popupContainer)
-addNewProject(popupContainer) // event listener for adding a new project 
+function showPopup(popupContainer) {
+  popupContainer.classList.remove('hidden')
 }
 
 
+//--------------RENDER SIDEBAR----------------\\
 export function renderSidebar() {
-const sideBarProjects = document.querySelector('.side-bar-middle')
-sideBarProjects.innerHTML =
-                     `<div class="side-bar-items-project-heading">
-                    <p class="project-side-heading">My Projects</p>
-                    <div id="add-project"><img src='${myImage}' class='image-plus'></div>
-                     </div>`
-projectArray.forEach((item, index) => {
-    sideBarProjects.innerHTML += 
-                    `<div class="side-bar-items-project" data-id="${item.projectName}" data-num="${index}">
-                    <p>${item.projectName}</p>
-                       <p class="project-num">${item.projectNum}</p>
-                    </div>`
-})
-toggleProject() // re add event listeners for adding new projects after updating html
-sidebarProjectsListeners()
-projectNumberCount()
+  const sideBarProjects = document.querySelector('.side-bar-middle')
+  
+  renderSidebarHeader(sideBarProjects)
+  renderProjectList(sideBarProjects)
+  initializeSidebarFeatures()
 }
+
+function renderSidebarHeader(container) {
+  container.innerHTML = `
+      <div class="side-bar-items-project-heading">
+          <p class="project-side-heading">My Projects</p>
+          <div id="add-project"><img src='${myImage}' class='image-plus'></div>
+      </div>`
+}
+
+function renderProjectList(container) {
+  const projectListHtml = projectArray.map((item, index) => {
+    return `
+      <div class="side-bar-items-project" data-id="${item.projectName}" data-num="${index}">
+        <p>${item.projectName}</p>
+        <p class="project-num">${item.projectNum}</p>
+      </div>`
+  })
+  container.innerHTML += projectListHtml.join('');
+}
+
+function initializeSidebarFeatures() {
+  toggleProject(); // re-add listener for toggling projects
+  sidebarProjectsListeners(); // attach listeners for loading projects individual page
+  projectNumberCount(); //update project count display
+}
+
+
+
+
 
 export function sidebarNumberCount () {
   const inboxNums = document.querySelector('#inboxNums')
