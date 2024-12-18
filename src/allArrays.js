@@ -63,7 +63,7 @@ export function spliceRow(e) {
   deleteToDoItem(targ, currentArray)
   saveDataToLocalStorage()
 
-  displayToDoList() // update the list
+  displayToDoList() // update/re-render the list
   updateUI() // update array count/tally
 }
 
@@ -72,36 +72,43 @@ function deleteToDoItem(targ, currentArray) {
 }
 
 
-
-
-
-  export function countArrayLength(arrays) {
-    let sum = 0
-   arrays.forEach(element => {
-      sum ++
-    });
-    return sum
-  }
-
-
-// project array 
-
+//-------------- ADD TO PROJECT ARRAY----------------\\
 export function addNewProject(popupContainer) {
   const addProject = document.getElementById('add-project-todo')
 
-  addProject.addEventListener('click', () => {
+  addProjectListener(addProject, popupContainer)
+}
+
+function getProjectModuleData() {
   const inputValue = document.querySelector('#project-input')
   const projectName = inputValue.value
   const projectNum = 1
+  const projectArr = []
 
-  projectArray.push({
-      projectName,
-      projectNum,
-      projectArr: []
-   })
-
-      saveList('projectArray', projectArray)
-      renderSidebar()
-      popupContainer.classList.add('hidden')
- })
+  return {projectName, projectNum, projectArr}
 }
+
+function addProjectListener(addProject, popupContainer) {
+  addProject.addEventListener('click', () => {
+    const projectData = getProjectModuleData()
+    addToProjectArray(projectData)
+    saveList('projectArray', projectArray);
+    refreshUI(popupContainer)
+  })
+}
+
+function addToProjectArray(objectData) {
+  projectArray.push(objectData)
+}
+
+function refreshUI(popupContainer) {
+  renderSidebar(); // Re-render the sidebar to reflect the new project
+  popupContainer.classList.add('hidden'); // Hide the popup
+}
+ 
+
+//--------------COUNT ARRAY LENGTH----------------\\
+export function countArrayLength(array) {
+  return array.length;
+}
+
