@@ -5,11 +5,20 @@ import { flag } from "./DOMinterface"
 
 export let todoArray = loadArrayStorage('todoArray')
 
-
-
+//--------------ADD FORM DATA TO SPECIFIC ARRAY----------------\\
 export function addToArray() {
+  const formData = getFormData()
+  const currentArray = getCurrentArray()
+  
+  pushFormDataToArray(formData, currentArray)
+
+  saveDataToLocalStorage()
+  resetForm()
+  updateUI()
+}
+
+function getFormData() {
   const inputName = document.querySelector('#todo-name')
-  const textDescription = document.querySelector('#description')
   const priority = document.querySelector('#priority')
   const dueDate = document.querySelector('#date')
 
@@ -17,32 +26,37 @@ export function addToArray() {
   const date = dueDate.value
   const priorityValue = priority.value
 
-  if (flag === null){
-    todoArray.push({
-      name,
-      date,
-      priorityValue
-  })
-  
-  saveList('todoArray', todoArray) // save to LS
-  }
-  else {
-    projectArray[flag].projectArr.push({
-      name,
-      date,
-      priorityValue
-  })
-  saveList('projectArray', projectArray) 
-  }
-
-
-  inputName.value = ''
-  dueDate.value = ''
-  textDescription.value = ''
-
-  sidebarNumberCount() // update number count
-  projectNumberCount() // update proj number count
+  return {name, date, priorityValue}
 }
+
+function getCurrentArray() {
+  return flag === null ? todoArray : projectArray[flag].projectArr;
+}
+
+function pushFormDataToArray(formData, currentArray) {
+currentArray.push(formData)
+}
+
+function saveDataToLocalStorage() {
+  saveList('todoArray', todoArray);
+  saveList('projectArray', projectArray);
+}
+
+function resetForm() {
+  document.querySelector('#todo-name').value = '';
+  document.querySelector('#description').value = '';
+  document.querySelector('#date').value = '';
+}
+
+function updateUI() {
+  sidebarNumberCount(); // Update sidebar item count
+  projectNumberCount(); // Update project item count
+}
+
+
+
+
+
 
 export function spliceRow (e) {
   const targ = e.target.id // ID corresponds to array index
