@@ -4,6 +4,8 @@ import { flag } from "./DOMinterface"
 
 
 export let todoArray = loadArrayStorage('todoArray')
+export let projectArray = loadArrayStorage('projectArray')
+
 
 //--------------ADD FORM DATA TO SPECIFIC ARRAY----------------\\
 export function addToArray() {
@@ -53,29 +55,25 @@ function updateUI() {
   projectNumberCount(); // Update project item count
 }
 
-
-
-
-
-
-export function spliceRow (e) {
+//--------------DELETE DATA FROM ARRAY----------------\\
+export function spliceRow(e) {
   const targ = e.target.id // ID corresponds to array index
-  if(flag === null) {
-    todoArray.splice(targ, 1)
-    saveList('todoArray', todoArray)// save to local storage
+  const currentArray = getCurrentArray()
 
-  }
-  else {
-    projectArray[flag].projectArr.splice(targ, 1)
-    saveList('projectArray', projectArray)// save to local storage
+  deleteToDoItem(targ, currentArray)
+  saveDataToLocalStorage()
 
-  }
-  
   displayToDoList() // update the list
-  sidebarNumberCount()
-  projectNumberCount() 
+  updateUI() // update array count/tally
+}
 
-  }
+function deleteToDoItem(targ, currentArray) {
+  currentArray.splice(targ, 1)
+}
+
+
+
+
 
   export function countArrayLength(arrays) {
     let sum = 0
@@ -87,7 +85,6 @@ export function spliceRow (e) {
 
 
 // project array 
-export let projectArray = loadArrayStorage('projectArray')
 
 export function addNewProject(popupContainer) {
   const addProject = document.getElementById('add-project-todo')
