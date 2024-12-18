@@ -3,6 +3,8 @@ import { loadInbox } from "./loadhomepage"
 import { displayToDoList, popupHtml, renderSidebar } from "./renderHTML"
 import { projectArray, spliceRow } from "./allArrays"
 
+export let flag = null
+
 
 
 export function toggleForm(queryName) {
@@ -22,36 +24,77 @@ export function closeProjectModule(popupContainer) {
     })
 }
 
-
-
-
-export function sidebarInboxLoad () {
+//--------------DEFAULT INBOX SETTING/LOAD----------------\\
+export function sidebarInboxLoad() {
     const inboxSidebar = document.querySelector('.side-inbox')
-    inboxSidebar.addEventListener('click', ()=> {
-        flag = null
-        loadInbox('Inbox')
-        renderSidebar()
-        displayToDoList()
-        setupEventListeners()
-    })
+    attachInboxClickListener(inboxSidebar);
 }
 
-export let flag = null
+// Function to attach click event listener for the Inbox
+function attachInboxClickListener(element) {
+    element.addEventListener('click', handleInboxClick);
+}
 
+// Function to handle the Inbox click event
+function handleInboxClick() {
+    resetState();
+    loadInboxContent();
+    initializeUIComponents();
+}
+
+// Function to reset any global states or flags
+function resetState() {
+    flag = null;
+}
+
+// Function to load the Inbox content
+function loadInboxContent() {
+    loadInbox('Inbox');
+}
+
+// Function to initialize or update UI components
+function initializeUIComponents() {
+    renderSidebar();
+    displayToDoList();
+    setupEventListeners();
+}
+
+
+//--------------INDIVIDUAL PROJECT LOAD----------------\\
 export function sidebarProjectsListeners() {
     const allProjects = document.querySelectorAll('.side-bar-items-project')
-    allProjects.forEach((item) => {
-        item.addEventListener('click', (e)=> {
-            const currentTarg = e.currentTarget.dataset.id
-            flag = projectArray.findIndex(project => project.projectName === currentTarg)
-            loadInbox(currentTarg)
-            renderSidebar()
-            displayToDoList()
-            setupEventListeners()
-            
-        })
-    })
+    attachProjectListeners(allProjects)
 }
+
+
+// Function to attach click listeners to all project items
+function attachProjectListeners(projectItems) {
+    projectItems.forEach(item => {
+        item.addEventListener('click', handleProjectClick);
+    });
+}
+
+// Function to handle the click event for a project
+function handleProjectClick(event) {
+    const projectId = getProjectIdFromEvent(event);
+    updateCurrentProjectFlag(projectId);
+    loadInbox(projectId);
+    initializeUIComponents()
+}
+
+// Helper function to extract the project ID from the event
+function getProjectIdFromEvent(event) {
+    return event.currentTarget.dataset.id;
+}
+
+
+function updateCurrentProjectFlag(projectId) {
+    flag = projectArray.findIndex(project => project.projectName === projectId)
+}
+
+
+
+
 
 // delete button event listeners
 export function attachDeleteListeners () { 

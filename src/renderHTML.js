@@ -106,8 +106,7 @@ function initializeSidebarFeatures() {
 }
 
 
-
-
+//--------------RENDER ARRAY COUNTS----------------\\
 
 export function sidebarNumberCount () {
   const inboxNums = document.querySelector('#inboxNums')
