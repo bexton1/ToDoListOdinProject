@@ -5,6 +5,7 @@ import { projectArray, spliceRow } from "./allArrays"
 import { loadTodayAndUpcoming } from "./loadTodayPage"
 
 export let flag = null
+export let flag1 =  null
 
 
 
@@ -63,9 +64,11 @@ function resetState() {
 function loadSideBarContent(sidebaritem) {
     if(sidebaritem === 'Inbox') {
         loadInbox('Inbox');
+        flag1 = null
     }
     else {
         loadTodayAndUpcoming(sidebaritem)
+        flag1 = sidebaritem
     }
     
 }
@@ -84,6 +87,10 @@ function findArrayToRender(sidebaritem) {
     }
     else if(sidebaritem === 'Today') {
         DisplayTodaysList()
+    }
+
+    else {
+        displayToDoList()
     }
 }
 
@@ -107,7 +114,8 @@ function handleProjectClick(event) {
     const projectId = getProjectIdFromEvent(event);
     updateCurrentProjectFlag(projectId);
     loadInbox(projectId);
-    initializeUIComponents()
+    initializeUIComponents(projectId)
+    flag1 = null
 }
 
 // Helper function to extract the project ID from the event

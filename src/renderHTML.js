@@ -37,7 +37,7 @@ function createTaskHTML(item, index) {
 return `<div>${item.name}</div>
 <div>${item.date}</div>
 <div>${item.priorityValue}</div>
-<div><button class='delete-button' id="${index}">Delete</button></div>`
+<div><button class='delete-button' id="${index}" data-id1="${item.name}">Delete</button></div>`
 }
 
 
@@ -135,7 +135,7 @@ attachDeleteListeners() // reattach event listeners after rendering html
 }
 
 function renderTodaysList(displayTasks, filterTodaysTasks) {
-const html = filterTodaysTasks.map((item, index) => createTodaysTaskHTML(item) )
+const html = filterTodaysTasks.map((item, index) => createTodaysTaskHTML(item, index) )
 
 displayTasks.innerHTML = html.join('')
 }
@@ -145,6 +145,6 @@ function createTodaysTaskHTML(item, index) {
   return `<div>${item.name}</div>
   <div>${item.date}</div>
   <div>${item.projectName}</div>
-  <div><button class='delete-button' id="${index}">Delete</button></div>`
+  <div><button class='delete-button' id="${index}" data-id=${item.name} data-arr=${item.projectName}>Delete</button></div>`
   }
   

@@ -1,6 +1,6 @@
-import { displayToDoList, sidebarNumberCount, renderSidebar, projectNumberCount } from "./renderHTML"
+import { displayToDoList, sidebarNumberCount, renderSidebar, projectNumberCount, DisplayTodaysList } from "./renderHTML"
 import { loadArrayStorage, saveList } from "./storage"
-import { flag } from "./DOMinterface"
+import { flag, flag1 } from "./DOMinterface"
 
 
 
@@ -74,25 +74,65 @@ return 'Inbox'
 
 //--------------DELETE DATA FROM ARRAY----------------\\
 export function spliceRow(e) {
+  const projName = e.target.dataset.arr
+  const target1 = e.target.dataset.id1
   const targ = e.target.id // ID corresponds to array index
+  const grandTarget = e.target.dataset.id
+  const grandTargetId = findGrandArrayDeleteIndex(grandTarget)
   const currentArray = getCurrentArray()
 
-  const deleteGrandFather =
+  findArray(target1, projName, grandTarget, grandTargetId, currentArray, targ)
+}
 
-  deleteToDoItem(targ, currentArray)
+function findArray(target1, projName, grandTarget, grandTargetId, currentArray, targ) {
+  if (flag1 === 'Today') {
+  deleteToDoItem(grandTargetId, grandArray)
   saveDataToLocalStorage()
+  DisplayTodaysList()
+  refactorList(projName, grandTarget)
+  updateUI()
 
-  displayToDoList() // update/re-render the list
-  updateUI() // update array count/tally
+
+  }
+  else {
+
+    deleteToDoItem(targ, currentArray)
+  
+    saveDataToLocalStorage()
+  
+    displayToDoList() // update/re-render the list
+    findGrandDeleteIndex(target1)
+    updateUI() // update array count/tally
+  }
 }
 
 function deleteToDoItem(targ, currentArray) {
   currentArray.splice(targ, 1)
 }
 
-function deleteGrandFather () {
-  
+function findGrandArrayDeleteIndex(target1) {
+  return grandArray.findIndex((item) => item.name === target1)
 }
+
+function findGrandDeleteIndex(grandTarget1) {
+const grandTargetIndex = grandArray.findIndex((item) => item.name === grandTarget1)
+deleteToDoItem(grandTargetIndex, grandArray)
+saveDataToLocalStorage()
+}
+
+function refactorList(projName, grandTarget) {
+if(projName === 'Inbox') {
+const result = todoArray.findIndex((item) => item.name === grandTarget)
+deleteToDoItem(result, todoArray)
+}
+else {
+  const result1 = projectArray.findIndex((item) => item.projectName === projName)
+  const result2 = projectArray[result1].projectArr.findIndex((item) => item.name === grandTarget)
+  deleteToDoItem(result2, projectArray[result1].projectArr)
+}
+saveDataToLocalStorage()
+}
+
 
 
 //-------------- ADD TO PROJECT ARRAY----------------\\
