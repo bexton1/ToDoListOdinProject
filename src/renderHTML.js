@@ -123,7 +123,7 @@ export function projectNumberCount() {
 
 
 
-
+//--------------RENDER TODAY HTML----------------\\
 export function DisplayTodaysList() {
 const displayTasks = document.querySelector('.task-content-box')
 
@@ -145,6 +145,6 @@ function createTodaysTaskHTML(item, index) {
   return `<div>${item.name}</div>
   <div>${item.date}</div>
   <div>${item.projectName}</div>
-  <div><button class='delete-button' id="${index}" data-id=${item.name} data-arr=${item.projectName}>Delete</button></div>`
+  <div><button class='delete-button' id="${index}" data-id=${item.name} data-arr='${item.projectName}'>Delete</button></div>`
   }
   

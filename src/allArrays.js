@@ -72,7 +72,15 @@ return 'Inbox'
   }
 }
 
-//--------------DELETE DATA FROM ARRAY----------------\\
+
+
+
+
+
+
+
+
+
 export function spliceRow(e) {
   const projName = e.target.dataset.arr
   const target1 = e.target.dataset.id1
@@ -128,7 +136,11 @@ deleteToDoItem(result, todoArray)
 else {
   const result1 = projectArray.findIndex((item) => item.projectName === projName)
   const result2 = projectArray[result1].projectArr.findIndex((item) => item.name === grandTarget)
+  
   deleteToDoItem(result2, projectArray[result1].projectArr)
+  console.log(result1)
+  console.log(projName)
+  
 }
 saveDataToLocalStorage()
 }
