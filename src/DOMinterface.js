@@ -1,6 +1,6 @@
 import { setupEventListeners } from "./pageLoadEventHandlers"
 import { loadInbox } from "./loadhomepage"
-import { displayToDoList, popupHtml, renderSidebar } from "./renderHTML"
+import { DisplayTodaysList, displayToDoList, popupHtml, renderSidebar } from "./renderHTML"
 import { projectArray, spliceRow } from "./allArrays"
 import { loadTodayAndUpcoming } from "./loadTodayPage"
 
@@ -26,8 +26,7 @@ export function closeProjectModule(popupContainer) {
 }
 
 //--------------DEFAULT SIDEBAR SETTING/LOAD----------------\\
-function defaultSidebarLoad(subject) {
-}
+
 
 export function sidebarInboxLoad() {
     const sidebarSubject = document.querySelectorAll('.side-bar-items')
@@ -47,7 +46,7 @@ function handleInboxClick(e) {
    const currentSidebar = findCurrentSidebar(e)
     resetState();
     loadSideBarContent(currentSidebar);
-    initializeUIComponents();
+    initializeUIComponents(currentSidebar);
 }
 
 function findCurrentSidebar(e) {
@@ -72,10 +71,20 @@ function loadSideBarContent(sidebaritem) {
 }
 
 // Function to initialize or update UI components
-function initializeUIComponents() {
+function initializeUIComponents(currentSidebar) {
     //renderSidebar();
-    displayToDoList();
+    findArrayToRender(currentSidebar)
     setupEventListeners();
+}
+
+function findArrayToRender(sidebaritem) {
+    if(sidebaritem === 'Inbox') {
+    displayToDoList();
+        
+    }
+    else if(sidebaritem === 'Today') {
+        DisplayTodaysList()
+    }
 }
 
 

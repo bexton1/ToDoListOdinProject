@@ -1,5 +1,6 @@
 import { closeProjectModule, sidebarProjectsListeners, toggleProject, flag, attachDeleteListeners } from "./DOMinterface";
 import { todoArray, countArrayLength, projectArray, addNewProject } from "./allArrays";
+import { filterGrandArrayToday } from "./compareDates";
 import myImage from './images/plus.png'
 
 
@@ -119,3 +120,31 @@ export function projectNumberCount() {
     num.innerHTML = countArrayLength(projectArray[index].projectArr)
   })
 }
+
+
+
+
+export function DisplayTodaysList() {
+const displayTasks = document.querySelector('.task-content-box')
+
+const filterTodaysTasks = filterGrandArrayToday()
+
+renderTodaysList(displayTasks, filterTodaysTasks)
+attachDeleteListeners() // reattach event listeners after rendering html
+
+}
+
+function renderTodaysList(displayTasks, filterTodaysTasks) {
+const html = filterTodaysTasks.map((item, index) => createTodaysTaskHTML(item) )
+
+displayTasks.innerHTML = html.join('')
+}
+
+//create task html
+function createTodaysTaskHTML(item, index) {
+  return `<div>${item.name}</div>
+  <div>${item.date}</div>
+  <div>${item.projectName}</div>
+  <div><button class='delete-button' id="${index}">Delete</button></div>`
+  }
+  

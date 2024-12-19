@@ -3,6 +3,7 @@ import { loadArrayStorage, saveList } from "./storage"
 import { flag } from "./DOMinterface"
 
 
+
 export let todoArray = loadArrayStorage('todoArray')
 export let projectArray = loadArrayStorage('projectArray')
 export let grandArray = loadArrayStorage('grandArray')
@@ -41,11 +42,14 @@ function getCurrentArray() {
 function pushFormDataToArray(formData, currentArray) {
 currentArray.push(formData)
 grandArray.push(formData)
+
 }
 
 function saveDataToLocalStorage() {
   saveList('todoArray', todoArray);
   saveList('projectArray', projectArray);
+  saveList('grandArray', grandArray);
+
 }
 
 function resetForm() {
@@ -73,6 +77,8 @@ export function spliceRow(e) {
   const targ = e.target.id // ID corresponds to array index
   const currentArray = getCurrentArray()
 
+  const deleteGrandFather =
+
   deleteToDoItem(targ, currentArray)
   saveDataToLocalStorage()
 
@@ -82,6 +88,10 @@ export function spliceRow(e) {
 
 function deleteToDoItem(targ, currentArray) {
   currentArray.splice(targ, 1)
+}
+
+function deleteGrandFather () {
+  
 }
 
 
