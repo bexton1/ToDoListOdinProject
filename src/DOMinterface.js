@@ -2,6 +2,7 @@ import { setupEventListeners } from "./pageLoadEventHandlers"
 import { loadInbox } from "./loadhomepage"
 import { displayToDoList, popupHtml, renderSidebar } from "./renderHTML"
 import { projectArray, spliceRow } from "./allArrays"
+import { loadTodayAndUpcoming } from "./loadTodayPage"
 
 export let flag = null
 
@@ -24,22 +25,34 @@ export function closeProjectModule(popupContainer) {
     })
 }
 
-//--------------DEFAULT INBOX SETTING/LOAD----------------\\
+//--------------DEFAULT SIDEBAR SETTING/LOAD----------------\\
+function defaultSidebarLoad(subject) {
+}
+
 export function sidebarInboxLoad() {
-    const inboxSidebar = document.querySelector('.side-inbox')
-    attachInboxClickListener(inboxSidebar);
+    const sidebarSubject = document.querySelectorAll('.side-bar-items')
+    
+    attachInboxClickListener(sidebarSubject);
 }
 
 // Function to attach click event listener for the Inbox
 function attachInboxClickListener(element) {
-    element.addEventListener('click', handleInboxClick);
+    element.forEach((item) => {
+    item.addEventListener('click', handleInboxClick);
+    })
 }
 
 // Function to handle the Inbox click event
-function handleInboxClick() {
+function handleInboxClick(e) {
+   const currentSidebar = findCurrentSidebar(e)
     resetState();
-    loadInboxContent();
+    loadSideBarContent(currentSidebar);
     initializeUIComponents();
+}
+
+function findCurrentSidebar(e) {
+const currentTarget = e.currentTarget.dataset.id
+return currentTarget
 }
 
 // Function to reset any global states or flags
@@ -48,13 +61,19 @@ function resetState() {
 }
 
 // Function to load the Inbox content
-function loadInboxContent() {
-    loadInbox('Inbox');
+function loadSideBarContent(sidebaritem) {
+    if(sidebaritem === 'Inbox') {
+        loadInbox('Inbox');
+    }
+    else {
+        loadTodayAndUpcoming(sidebaritem)
+    }
+    
 }
 
 // Function to initialize or update UI components
 function initializeUIComponents() {
-    renderSidebar();
+    //renderSidebar();
     displayToDoList();
     setupEventListeners();
 }

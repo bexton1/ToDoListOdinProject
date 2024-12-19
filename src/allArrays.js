@@ -5,9 +5,10 @@ import { flag } from "./DOMinterface"
 
 export let todoArray = loadArrayStorage('todoArray')
 export let projectArray = loadArrayStorage('projectArray')
+export let grandArray = loadArrayStorage('grandArray')
 
 
-//--------------ADD FORM DATA TO SPECIFIC ARRAY----------------\\
+//--------------ADD TODO SUBMISSION DATA TO SPECIFIC ARRAY----------------\\
 export function addToArray() {
   const formData = getFormData()
   const currentArray = getCurrentArray()
@@ -27,8 +28,10 @@ function getFormData() {
   const name = inputName.value
   const date = dueDate.value
   const priorityValue = priority.value
+  const projectName = getCurrentProjectName()
+  
 
-  return {name, date, priorityValue}
+  return {name, date, priorityValue, projectName}
 }
 
 function getCurrentArray() {
@@ -37,6 +40,7 @@ function getCurrentArray() {
 
 function pushFormDataToArray(formData, currentArray) {
 currentArray.push(formData)
+grandArray.push(formData)
 }
 
 function saveDataToLocalStorage() {
@@ -53,6 +57,15 @@ function resetForm() {
 function updateUI() {
   sidebarNumberCount(); // Update sidebar item count
   projectNumberCount(); // Update project item count
+}
+
+function getCurrentProjectName() {
+  if (flag === null) {
+return 'Inbox'
+  }
+  else {
+    return projectArray[flag].projectName
+  }
 }
 
 //--------------DELETE DATA FROM ARRAY----------------\\
