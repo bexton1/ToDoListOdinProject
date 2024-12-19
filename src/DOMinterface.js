@@ -1,4 +1,4 @@
-import { setupEventListeners } from "."
+import { setupEventListeners } from "./pageLoadEventHandlers"
 import { loadInbox } from "./loadhomepage"
 import { displayToDoList, popupHtml, renderSidebar } from "./renderHTML"
 import { projectArray, spliceRow } from "./allArrays"
