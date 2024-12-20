@@ -38,6 +38,7 @@ function createTaskHTML(item, index) {
 return `<div>${item.name}</div>
 <div>${item.date}</div>
 <div>${item.priorityValue}</div>
+<div><button class="info-button" data-id="${item.name}">Info</button></div>
 <div><button class='delete-button' id="${index}" data-id1="${item.name}">Delete</button></div>`
 }
 
@@ -161,7 +162,10 @@ function createTodaysTaskHTML(item, index) {
   return `<div>${item.name}</div>
   <div>${item.date}</div>
   <div>${item.projectName}</div>
-  <div><button class='delete-button' id="${index}" data-id=${item.name} data-arr='${item.projectName}'>Delete</button></div>`
+  <div><button class="info-button" data-id="${item.name}">Info</button></div>
+  <div><button class='delete-button' id="${index}" data-id=${item.name} data-arr='${item.projectName}'>Delete</button></div>
+  
+  `
   }
 
   function findCurrentArray(sidebaritem) {
@@ -174,3 +178,8 @@ function createTodaysTaskHTML(item, index) {
   }
   
 
+//--------------RENDER INFO POPUP----------------\\
+export function renderInfoPopup(e) {
+const currentInfoItem = e.target.dataset.id
+
+}

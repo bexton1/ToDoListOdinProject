@@ -1,6 +1,6 @@
 import { setupEventListeners } from "./pageLoadEventHandlers"
 import { loadInbox } from "./loadhomepage"
-import { displayTodaysList, displayToDoList, popupHtml, renderSidebar } from "./renderHTML"
+import { displayTodaysList, displayToDoList, popupHtml, renderSidebar, renderInfoPopup } from "./renderHTML"
 import { projectArray, spliceRow } from "./allArrays"
 import { loadTodayAndUpcoming } from "./loadTodayPage"
 
@@ -24,6 +24,15 @@ export function closeProjectModule(popupContainer) {
     closeProject.addEventListener('click', () => {
         popupContainer.classList.add('hidden')
     })
+}
+
+export function toggleInfo() {
+    const openInfo = document.querySelectorAll('.info-button')
+    openInfo.forEach((item) => {
+        item.addEventListener('click', renderInfoPopup)
+    })
+    
+   
 }
 
 //--------------DEFAULT SIDEBAR SETTING/LOAD----------------\\

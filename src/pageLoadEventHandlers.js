@@ -1,10 +1,11 @@
 import { addToArray } from "./allArrays";
 import { displayToDoList } from "./renderHTML";
-import { toggleForm, toggleProject } from "./DOMinterface";
+import { toggleForm, toggleInfo, toggleProject } from "./DOMinterface";
 
 export function setupEventListeners() {
   setupFormEventListeners();
   toggleProject();
+  toggleInfo()
 }
 
 // form submit listener
