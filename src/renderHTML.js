@@ -1,4 +1,4 @@
-import { closeProjectModule, sidebarProjectsListeners, toggleProject, flag, attachDeleteListeners } from "./DOMinterface";
+import { closeProjectModule, sidebarProjectsListeners, toggleProject, flag, attachDeleteListeners, toggleInfo, closeInfoModule } from "./DOMinterface";
 import { todoArray, countArrayLength, projectArray, addNewProject, grandArray } from "./allArrays";
 import { filterGrandArrayToday, filterGrandArrayUpcoming } from "./compareDates";
 import myImage from './images/plus.png'
@@ -12,7 +12,7 @@ export function displayToDoList() {
 
   renderTasks(displayTasks, tasks)
   attachDeleteListeners() // reattach event listeners after rendering html
-  
+  toggleInfo() //reattach info listener
 }
 
 // render tasks to DOM
@@ -188,6 +188,7 @@ export function renderInfoPopup(e) {
 
   const matchingItem = findItemToRender(currentInfoItem)
   joinHtML(matchingItem, infoPopupContainer)
+  closeInfoModule(infoPopupContainer)
 }
 
   function findItemToRender(currentInfoItem) {
@@ -205,7 +206,7 @@ export function renderInfoPopup(e) {
                 <h1 id="heading-info">${item.projectName}</h1>
                 <p class="info-items">Project: <span class="info-span info-name">${item.name}</span></p>
                 <p class="info-items">Date: <span class="info-span info-date">${item.date}</span></p>
-                <p class="info-items">Description: <span class="info-span info-description"></span></p>
+                <p class="info-items">Description: <span class="info-span info-description">${item.infodescription}</span></p>
             </div>`
 }
 

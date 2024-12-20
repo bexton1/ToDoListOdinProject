@@ -8,7 +8,7 @@ export let flag = null
 export let flag1 =  null
 
 
-
+//--------------toggle / popup event listeners----------------\\
 export function toggleForm(queryName) {
 queryName.classList.toggle('active')
 }
@@ -31,8 +31,13 @@ export function toggleInfo() {
     openInfo.forEach((item) => {
         item.addEventListener('click', renderInfoPopup)
     })
-    
-   
+}
+
+export function closeInfoModule(infoPopupContainer){
+    const closeInfo = document.querySelector('#info-close')
+    closeInfo.addEventListener('click', () => {
+        infoPopupContainer.classList.add('hidden1')
+    })
 }
 
 //--------------DEFAULT SIDEBAR SETTING/LOAD----------------\\
