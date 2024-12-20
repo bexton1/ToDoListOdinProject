@@ -85,13 +85,10 @@ function findArrayToRender(sidebaritem) {
     displayToDoList();
         
     }
-    else if(sidebaritem === 'Today') {
-        displayTodaysList()
+    else if(sidebaritem === 'Today' || sidebaritem === 'Upcoming') {
+        displayTodaysList(sidebaritem)
     }
 
-    else {
-        displayToDoList()
-    }
 }
 
 

@@ -1,6 +1,6 @@
 import { closeProjectModule, sidebarProjectsListeners, toggleProject, flag, attachDeleteListeners } from "./DOMinterface";
 import { todoArray, countArrayLength, projectArray, addNewProject } from "./allArrays";
-import { filterGrandArrayToday } from "./compareDates";
+import { filterGrandArrayToday, filterGrandArrayUpcoming } from "./compareDates";
 import myImage from './images/plus.png'
 
 
@@ -132,10 +132,10 @@ export function projectNumberCount() {
 
 
 //--------------RENDER TODAY HTML----------------\\
-export function displayTodaysList() {
+export function displayTodaysList(sidebaritem) {
 const displayTasks = document.querySelector('.task-content-box')
 
-const filterTodaysTasks = filterGrandArrayToday()
+const filterTodaysTasks = findCurrentArray(sidebaritem)
 
 renderTodaysList(displayTasks, filterTodaysTasks)
 attachDeleteListeners() // reattach event listeners after rendering html
@@ -155,4 +155,16 @@ function createTodaysTaskHTML(item, index) {
   <div>${item.projectName}</div>
   <div><button class='delete-button' id="${index}" data-id=${item.name} data-arr='${item.projectName}'>Delete</button></div>`
   }
+
+  function findCurrentArray(sidebaritem) {
+    if(sidebaritem === 'Today'){
+      return filterGrandArrayToday()
+    }
+    else if(sidebaritem === 'Upcoming') {
+      console.log(filterGrandArrayUpcoming())
+      return filterGrandArrayUpcoming()
+    }
+  }
   
+
+//--------------RENDER UPCOMING HTML----------------\\
