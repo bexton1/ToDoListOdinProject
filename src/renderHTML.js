@@ -131,7 +131,7 @@ export function projectNumberCount() {
 
 
 
-//--------------RENDER TODAY HTML----------------\\
+//--------------RENDER TODAY/UPCOMING HTML----------------\\
 export function displayTodaysList(sidebaritem) {
 const displayTasks = document.querySelector('.task-content-box')
 
@@ -167,4 +167,3 @@ function createTodaysTaskHTML(item, index) {
   }
   
 
-//--------------RENDER UPCOMING HTML----------------\\

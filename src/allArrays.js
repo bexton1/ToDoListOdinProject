@@ -101,7 +101,7 @@ function handleRowDeletion(itemName, projectName, grandTargetName, itemIndex) {
 function handleTodayViewDeletion(grandTargetId, projectName, grandTargetName) {
   deleteItemByIndex(grandTargetId, grandArray); // delete item from grandArray
   saveDataToLocalStorage();
-  displayTodaysList(); //render html
+  displayTodaysList(flag1); //render html
   updateOtherLists(projectName, grandTargetName); // update other lists to display the true state 
 }
 

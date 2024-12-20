@@ -89,6 +89,10 @@ function findArrayToRender(sidebaritem) {
         displayTodaysList(sidebaritem)
     }
 
+    else {
+        displayToDoList() // renders project list by default if the above options arnt valid
+    }
+
 }
 
 
