@@ -12,6 +12,7 @@ export function displayToDoList() {
 
   renderTasks(displayTasks, tasks)
   attachDeleteListeners() // reattach event listeners after rendering html
+  
 }
 
 // render tasks to DOM
@@ -121,17 +122,22 @@ export function projectNumberCount() {
   })
 }
 
+  function countTodayLength(filterTodaysTasks) {
+  const todayNum = document.querySelector("#today-nums")
+  todayNum.innerHTML = filterTodaysTasks.length
+}
+
 
 
 //--------------RENDER TODAY HTML----------------\\
-export function DisplayTodaysList() {
+export function displayTodaysList() {
 const displayTasks = document.querySelector('.task-content-box')
 
 const filterTodaysTasks = filterGrandArrayToday()
 
 renderTodaysList(displayTasks, filterTodaysTasks)
 attachDeleteListeners() // reattach event listeners after rendering html
-
+countTodayLength(filterTodaysTasks)
 }
 
 function renderTodaysList(displayTasks, filterTodaysTasks) {

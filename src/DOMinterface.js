@@ -1,6 +1,6 @@
 import { setupEventListeners } from "./pageLoadEventHandlers"
 import { loadInbox } from "./loadhomepage"
-import { DisplayTodaysList, displayToDoList, popupHtml, renderSidebar } from "./renderHTML"
+import { displayTodaysList, displayToDoList, popupHtml, renderSidebar } from "./renderHTML"
 import { projectArray, spliceRow } from "./allArrays"
 import { loadTodayAndUpcoming } from "./loadTodayPage"
 
@@ -86,7 +86,7 @@ function findArrayToRender(sidebaritem) {
         
     }
     else if(sidebaritem === 'Today') {
-        DisplayTodaysList()
+        displayTodaysList()
     }
 
     else {

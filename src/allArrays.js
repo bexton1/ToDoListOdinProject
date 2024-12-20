@@ -1,4 +1,4 @@
-import { displayToDoList, sidebarNumberCount, renderSidebar, projectNumberCount, DisplayTodaysList } from "./renderHTML"
+import { displayToDoList, sidebarNumberCount, renderSidebar, projectNumberCount, displayTodaysList } from "./renderHTML"
 import { loadArrayStorage, saveList } from "./storage"
 import { flag, flag1 } from "./DOMinterface"
 
@@ -79,71 +79,162 @@ return 'Inbox'
 
 
 
-
-
+//--------------DELETE FROM RELEVANT LIST AND UPDATE CORRECT STATE IN ALL ARRAYS----------------\\
 export function spliceRow(e) {
-  const projName = e.target.dataset.arr
-  const target1 = e.target.dataset.id1
-  const targ = e.target.id // ID corresponds to array index
-  const grandTarget = e.target.dataset.id
-  const grandTargetId = findGrandArrayDeleteIndex(grandTarget)
-  const currentArray = getCurrentArray()
+  const projectName = e.target.dataset.arr; //projectName in 'Today' html
+  const itemName = e.target.dataset.id1; // item name in Inbox/project html
+  const itemIndex = e.target.id; // ID corresponds to array index in inbox/project
+  const grandTargetName = e.target.dataset.id; // item name in 'Today' html
 
-  findArray(target1, projName, grandTarget, grandTargetId, currentArray, targ)
+  handleRowDeletion(itemName, projectName, grandTargetName, itemIndex);
 }
 
-function findArray(target1, projName, grandTarget, grandTargetId, currentArray, targ) {
+function handleRowDeletion(itemName, projectName, grandTargetName, itemIndex) {
+  const grandTargetId = findIndexByName(grandArray, grandTargetName);
+  const currentArray = getCurrentArray();
+
   if (flag1 === 'Today') {
-  deleteToDoItem(grandTargetId, grandArray)
-  saveDataToLocalStorage()
-  DisplayTodaysList()
-  refactorList(projName, grandTarget)
-  updateUI()
-
-
+    handleTodayViewDeletion(grandTargetId, projectName, grandTargetName);
+  } else {
+    handleDefaultViewDeletion(currentArray, itemIndex, itemName);
   }
-  else {
+  updateUI(); // update number counts
+}
 
-    deleteToDoItem(targ, currentArray)
-  
-    saveDataToLocalStorage()
-  
-    displayToDoList() // update/re-render the list
-    findGrandDeleteIndex(target1)
-    updateUI() // update array count/tally
+
+// ** Today View Deletion **
+function handleTodayViewDeletion(grandTargetId, projectName, grandTargetName) {
+  deleteItemByIndex(grandTargetId, grandArray); // delete item from grandArray
+  saveDataToLocalStorage();
+  displayTodaysList(); //render html
+  refactorProjectList(projectName, grandTargetName); // update other lists to display the true state 
+}
+
+
+// ** Default View Deletion **
+function handleDefaultViewDeletion(currentArray, itemIndex, itemName) {
+  deleteItemByIndex(itemIndex, currentArray); // 
+  saveDataToLocalStorage();
+  displayToDoList(); // Re-render the list
+  deleteFromGrandArray(itemName); // update grandArray to display the refreshed new state of the lists. 
+}
+
+
+// ** Utility Functions **
+function deleteItemByIndex(index, array) { // removes item from array
+  if (index >= 0) {
+    array.splice(index, 1);
   }
 }
 
-function deleteToDoItem(targ, currentArray) {
-  currentArray.splice(targ, 1)
+function findIndexByName(array, name, key = 'name') {
+  return array.findIndex((item) => item[key] === name);
 }
 
-function findGrandArrayDeleteIndex(target1) {
-  return grandArray.findIndex((item) => item.name === target1)
+function deleteFromGrandArray(itemName) {
+  const grandIndex = findIndexByName(grandArray, itemName);
+  deleteItemByIndex(grandIndex, grandArray);
+  saveDataToLocalStorage();
 }
 
-function findGrandDeleteIndex(grandTarget1) {
-const grandTargetIndex = grandArray.findIndex((item) => item.name === grandTarget1)
-deleteToDoItem(grandTargetIndex, grandArray)
-saveDataToLocalStorage()
+// ** Refactor Project List **
+   //inorder to display the true state we need tofind out which list we have to delete from (todoarray or projectArray)
+function refactorProjectList(projectName, grandTargetName) {
+  if (projectName === 'Inbox') {
+    deleteFromTodoArray(grandTargetName);
+  } else {
+    deleteFromProjectArray(projectName, grandTargetName);
+  }
+  saveDataToLocalStorage();
 }
 
-function refactorList(projName, grandTarget) {
-if(projName === 'Inbox') {
-const result = todoArray.findIndex((item) => item.name === grandTarget)
-deleteToDoItem(result, todoArray)
+//search todo array looking for the corresponding index and then delete it
+function deleteFromTodoArray(targetName) {
+  const index = findIndexByName(todoArray, targetName);
+  deleteItemByIndex(index, todoArray);
 }
-else {
-  const result1 = projectArray.findIndex((item) => item.projectName === projName)
-  const result2 = projectArray[result1].projectArr.findIndex((item) => item.name === grandTarget)
+
+//search project array looking for the corresponding index 
+function deleteFromProjectArray(projectName, targetName) {
+  const projectIndex = findIndexByName(projectArray, projectName, 'projectName');
+//once the array is found we then have to find the correct item to delete within the nested array.
+    const projectItems = projectArray[projectIndex].projectArr;
+    const itemIndex = findIndexByName(projectItems, targetName);
+    deleteItemByIndex(itemIndex, projectItems);
   
-  deleteToDoItem(result2, projectArray[result1].projectArr)
-  console.log(result1)
-  console.log(projName)
+}
+
+
+
+
+
+
+
+
+
+// export function spliceRow(e) {
+//   const projName = e.target.dataset.arr
+//   const target1 = e.target.dataset.id1
+//   const targ = e.target.id // ID corresponds to array index
+//   const grandTarget = e.target.dataset.id
+//   const grandTargetId = findGrandArrayDeleteIndex(grandTarget)
+//   const currentArray = getCurrentArray()
+
+//   findArray(target1, projName, grandTarget, grandTargetId, currentArray, targ)
+// }
+
+// function findArray(target1, projName, grandTarget, grandTargetId, currentArray, targ) {
+//   if (flag1 === 'Today') {
+//   deleteToDoItem(grandTargetId, grandArray)
+//   saveDataToLocalStorage()
+//   DisplayTodaysList()
+//   refactorList(projName, grandTarget)
+//   updateUI()
+
+
+//   }
+//   else {
+
+//     deleteToDoItem(targ, currentArray)
   
-}
-saveDataToLocalStorage()
-}
+//     saveDataToLocalStorage()
+  
+//     displayToDoList() // update/re-render the list
+//     findGrandDeleteIndex(target1)
+//     updateUI() // update array count/tally
+//   }
+// }
+
+// function deleteToDoItem(targ, currentArray) {
+//   currentArray.splice(targ, 1)
+// }
+
+// function findGrandArrayDeleteIndex(target1) {
+//   return grandArray.findIndex((item) => item.name === target1)
+// }
+
+// function findGrandDeleteIndex(grandTarget1) {
+// const grandTargetIndex = grandArray.findIndex((item) => item.name === grandTarget1)
+// deleteToDoItem(grandTargetIndex, grandArray)
+// saveDataToLocalStorage()
+// }
+
+// function refactorList(projName, grandTarget) {
+// if(projName === 'Inbox') {
+// const result = todoArray.findIndex((item) => item.name === grandTarget)
+// deleteToDoItem(result, todoArray)
+// }
+// else {
+//   const result1 = projectArray.findIndex((item) => item.projectName === projName)
+//   const result2 = projectArray[result1].projectArr.findIndex((item) => item.name === grandTarget)
+  
+//   deleteToDoItem(result2, projectArray[result1].projectArr)
+//   console.log(result1)
+//   console.log(projName)
+  
+// }
+// saveDataToLocalStorage()
+// }
 
 
 
