@@ -1,7 +1,7 @@
 import { setupEventListeners } from "./pageLoadEventHandlers"
 import { loadInbox } from "./loadhomepage"
-import { displayTodaysList, displayToDoList, popupHtml, renderSidebar, renderInfoPopup } from "./renderHTML"
-import { projectArray, spliceRow } from "./allArrays"
+import { displayTodaysList, displayToDoList, popupHtml, renderSidebar, renderInfoPopup} from "./renderHTML"
+import { projectArray, spliceRow, addToCompleted } from "./allArrays"
 import { loadTodayAndUpcoming } from "./loadTodayPage"
 
 export let flag = null
@@ -144,14 +144,21 @@ function updateCurrentProjectFlag(projectId) {
 }
 
 
-
-
-
-// delete button event listeners
+//--------------DELETE BUTTON LISTENERS----------------\\
 export function attachDeleteListeners () { 
   const spliceItems = document.querySelectorAll('.delete-button')
 
   spliceItems.forEach((button) => {
       button.addEventListener('click', spliceRow)
 })
+}
+
+//--------------CHECKBOX LISTENERS----------------\\\
+ export function checkBoxListener() {
+    const checkBox = document.querySelectorAll('.check-box')
+    checkBox.forEach((item) => {
+        item.addEventListener('change', (e) => {
+            addToCompleted(e)
+        })
+    })
 }

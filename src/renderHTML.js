@@ -35,7 +35,8 @@ function getTasksToDisplay() {
 
 //create task html
 function createTaskHTML(item, index) {
-return `<div>${item.name}</div>
+return `
+<div><input type="checkbox" class="check-box" data-id2="${item.name}"> ${item.name}</div>
 <div>${item.date}</div>
 <div>${item.priorityValue}</div>
 <div><button class="info-button" data-id="${item.name}">Info</button></div>

@@ -7,6 +7,8 @@ import { flag, flag1 } from "./DOMinterface"
 export let todoArray = loadArrayStorage('todoArray')
 export let projectArray = loadArrayStorage('projectArray')
 export let grandArray = loadArrayStorage('grandArray')
+export let completedArray = loadArrayStorage('completedArray')
+export let storedCheckboxArray = loadArrayStorage('storedCheckboxArray')
 
 
 //--------------ADD TODO SUBMISSION DATA TO SPECIFIC ARRAY----------------\\
@@ -204,4 +206,35 @@ function refreshUI(popupContainer) {
 export function countArrayLength(array) {
   return array.length;
 }
+
+//--------------COMPLETED ARRAY ADDING AND SPLICING----------------\\
+export function addToCompleted(e) {
+  const checkedDataId = e.target.dataset.id2
+
+  const MatchingObj = findMatchingItem(checkedDataId)
+  compareCheckedClick(MatchingObj, e, checkedDataId)
+}
+
+function findMatchingItem(data){
+  return grandArray.find((item) => item.name === data)
+}
+
+function compareCheckedClick(MatchingObj, e, checkedDataId) {
+  if(e.target.checked) {
+    completedArray.push(MatchingObj)
+    console.log(completedArray)
+  }
+  else {
+    completedArray.splice(findCompletedIndex(checkedDataId), 1)
+  }
+
+  saveList('completedArray', completedArray)
+}
+
+function findCompletedIndex(checkedDataId){
+  return completedArray.findIndex((item) => item.name === checkedDataId )
+}
+
+
+//--------------CHECKBOX LOCALSTORAGE FUNCTIONALITY----------------\\
 
