@@ -1,4 +1,4 @@
-import { renderSidebar, sidebarNumberCount, displayToDoList, projectNumberCount } from "./renderHTML";
+import { renderSidebar, sidebarNumberCount, displayToDoList, projectNumberCount, countUpcomingLength, countTodayLength } from "./renderHTML";
 import { sidebarInboxLoad } from "./DOMinterface";
 
 export function renderInitialUI() {
@@ -8,4 +8,6 @@ export function renderInitialUI() {
   renderSidebar();
   sidebarNumberCount();
   projectNumberCount();
+  countUpcomingLength()
+  countTodayLength()
 }

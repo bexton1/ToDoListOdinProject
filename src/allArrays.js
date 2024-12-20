@@ -1,4 +1,4 @@
-import { displayToDoList, sidebarNumberCount, renderSidebar, projectNumberCount, displayTodaysList, countTodayLength } from "./renderHTML"
+import { displayToDoList, sidebarNumberCount, renderSidebar, projectNumberCount, displayTodaysList, countTodayLength, countUpcomingLength } from "./renderHTML"
 import { loadArrayStorage, saveList } from "./storage"
 import { flag, flag1 } from "./DOMinterface"
 
@@ -62,6 +62,7 @@ function updateUI() {
   sidebarNumberCount(); // Update sidebar item count
   projectNumberCount(); // Update project item count
   countTodayLength()
+  countUpcomingLength()
 }
 
 function getCurrentProjectName() {
@@ -88,7 +89,7 @@ function handleRowDeletion(itemName, projectName, grandTargetName, itemIndex) {
   const grandTargetId = findIndexByName(grandArray, grandTargetName);
   const currentArray = getCurrentArray();
 
-  if (flag1 === 'Today') {
+  if (flag1 === 'Today' || flag1 === 'Upcoming') {
     handleTodayViewDeletion(grandTargetId, projectName, grandTargetName);
   } else {
     handleDefaultViewDeletion(currentArray, itemIndex, itemName);

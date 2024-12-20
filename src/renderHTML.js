@@ -129,6 +129,13 @@ export function projectNumberCount() {
   todayNum.innerHTML = findTodayLength.length
 }
 
+export function countUpcomingLength () {
+  const upcomingNum = document.querySelector('#upcoming-nums')
+  const findUpcomingLength = filterGrandArrayUpcoming()
+
+  upcomingNum.innerHTML = findUpcomingLength.length
+}
+
 
 
 //--------------RENDER TODAY/UPCOMING HTML----------------\\
@@ -140,6 +147,7 @@ const filterTodaysTasks = findCurrentArray(sidebaritem)
 renderTodaysList(displayTasks, filterTodaysTasks)
 attachDeleteListeners() // reattach event listeners after rendering html
 countTodayLength()
+countUpcomingLength()
 }
 
 function renderTodaysList(displayTasks, filterTodaysTasks) {
@@ -161,7 +169,6 @@ function createTodaysTaskHTML(item, index) {
       return filterGrandArrayToday()
     }
     else if(sidebaritem === 'Upcoming') {
-      console.log(filterGrandArrayUpcoming())
       return filterGrandArrayUpcoming()
     }
   }
