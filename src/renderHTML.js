@@ -1,5 +1,5 @@
 import { closeProjectModule, sidebarProjectsListeners, toggleProject, flag, attachDeleteListeners } from "./DOMinterface";
-import { todoArray, countArrayLength, projectArray, addNewProject } from "./allArrays";
+import { todoArray, countArrayLength, projectArray, addNewProject, grandArray } from "./allArrays";
 import { filterGrandArrayToday, filterGrandArrayUpcoming } from "./compareDates";
 import myImage from './images/plus.png'
 
@@ -180,6 +180,37 @@ function createTodaysTaskHTML(item, index) {
 
 //--------------RENDER INFO POPUP----------------\\
 export function renderInfoPopup(e) {
-const currentInfoItem = e.target.dataset.id
+  const infoPopupContainer = document.querySelector('.display-info')
+  const currentInfoItem = e.target.dataset.id
 
+  revealInfoContainer(infoPopupContainer)
+ 
+
+  const matchingItem = findItemToRender(currentInfoItem)
+  joinHtML(matchingItem, infoPopupContainer)
+}
+
+  function findItemToRender(currentInfoItem) {
+    return grandArray.find((item) => item.name === currentInfoItem)
+  }
+
+  function joinHtML(matchingItem, infoPopupContainer) {
+   const htmlRender = generateHtml(matchingItem)
+   infoPopupContainer.innerHTML = htmlRender
+  }
+
+  function generateHtml(item) {
+    return  `<div class="display-info-content">
+                <button id="info-close">X</button>
+                <h1 id="heading-info">${item.projectName}</h1>
+                <p class="info-items">Project: <span class="info-span info-name">${item.name}</span></p>
+                <p class="info-items">Date: <span class="info-span info-date">${item.date}</span></p>
+                <p class="info-items">Description: <span class="info-span info-description"></span></p>
+            </div>`
+}
+
+
+
+  function revealInfoContainer(infoPopupContainer) {
+infoPopupContainer.classList.remove('hidden1')
 }
