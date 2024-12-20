@@ -122,9 +122,11 @@ export function projectNumberCount() {
   })
 }
 
-  function countTodayLength(filterTodaysTasks) {
+ export function countTodayLength() {
   const todayNum = document.querySelector("#today-nums")
-  todayNum.innerHTML = filterTodaysTasks.length
+  const findTodayLength = filterGrandArrayToday()
+
+  todayNum.innerHTML = findTodayLength.length
 }
 
 
@@ -137,7 +139,7 @@ const filterTodaysTasks = filterGrandArrayToday()
 
 renderTodaysList(displayTasks, filterTodaysTasks)
 attachDeleteListeners() // reattach event listeners after rendering html
-countTodayLength(filterTodaysTasks)
+countTodayLength()
 }
 
 function renderTodaysList(displayTasks, filterTodaysTasks) {
