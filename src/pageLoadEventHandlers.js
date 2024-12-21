@@ -7,7 +7,7 @@ export function setupEventListeners() {
   setupFormEventListeners();
   toggleProject();
   toggleInfo()
-  checkBoxListener()
+  //checkBoxListener()
   loadCheckedBoxes()
   countCompletedLength()
 }

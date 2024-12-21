@@ -1,7 +1,8 @@
-import { closeProjectModule, sidebarProjectsListeners, toggleProject, flag, attachDeleteListeners, toggleInfo, closeInfoModule } from "./DOMinterface";
+import { closeProjectModule, sidebarProjectsListeners, toggleProject, flag, attachDeleteListeners, toggleInfo, closeInfoModule, checkBoxListener } from "./DOMinterface";
 import { todoArray, countArrayLength, projectArray, addNewProject, grandArray, completedArray } from "./allArrays";
 import { filterGrandArrayToday, filterGrandArrayUpcoming } from "./compareDates";
 import myImage from './images/plus.png'
+import { loadCheckedBoxes } from "./storage";
 
 
 
@@ -13,6 +14,8 @@ export function displayToDoList() {
   renderTasks(displayTasks, tasks)
   attachDeleteListeners() // reattach event listeners after rendering html
   toggleInfo() //reattach info listener
+  loadCheckedBoxes()
+  checkBoxListener()
 }
 
 // render tasks to DOM
@@ -226,6 +229,7 @@ infoPopupContainer.classList.remove('hidden1')
 export function renderCompletedArray() {
   const displayTasks = document.querySelector('.task-content-box')
   renderLists(displayTasks)
+  attachDeleteListeners()
   countCompletedLength()
 }
 
@@ -236,10 +240,10 @@ function renderLists(displayTasks){
 
 function createCompletedHTML(item, index){
   return `
-<div> ${item.name}</div>
+<div>${item.name}</div>
 <div>${item.date}</div>
 <div>${item.projectName}</div>
 <div><button class="info-button" data-id="${item.name}">Info</button></div>
-<div><button class='delete-button' id="${index}" data-id1="${item.name}" data-arr='${item.projectName}'>Delete</button></div>`
+<div><button class='delete-button' id="${index}" data-id="${item.name}" data-arr='${item.projectName}'>Delete</button></div>`
 
 }

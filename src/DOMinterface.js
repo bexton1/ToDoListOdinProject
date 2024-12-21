@@ -83,6 +83,7 @@ function loadSideBarContent(sidebaritem) {
     else {
         loadTodayAndUpcoming(sidebaritem)
         flag1 = sidebaritem
+        
     }
     
 }

@@ -1,4 +1,4 @@
-import { displayToDoList, sidebarNumberCount, renderSidebar, projectNumberCount, displayTodaysList, countTodayLength, countUpcomingLength, countCompletedLength } from "./renderHTML"
+import { displayToDoList, sidebarNumberCount, renderSidebar, projectNumberCount, displayTodaysList, countTodayLength, countUpcomingLength, countCompletedLength, renderCompletedArray } from "./renderHTML"
 import { loadArrayStorage, saveList } from "./storage"
 import { flag, flag1 } from "./DOMinterface"
 
@@ -54,6 +54,7 @@ function saveDataToLocalStorage() {
   saveList('todoArray', todoArray);
   saveList('projectArray', projectArray);
   saveList('grandArray', grandArray);
+  saveList('completedArray', completedArray)
 
 }
 
@@ -68,6 +69,7 @@ function updateUI() {
   projectNumberCount(); // Update project item count
   countTodayLength()
   countUpcomingLength()
+  countCompletedLength()
 }
 
 function getCurrentProjectName() {
@@ -96,7 +98,12 @@ function handleRowDeletion(itemName, projectName, grandTargetName, itemIndex) {
 
   if (flag1 === 'Today' || flag1 === 'Upcoming') {
     handleTodayViewDeletion(grandTargetId, projectName, grandTargetName);
-  } else {
+  } 
+  else if(flag1 === 'Completed') {
+    handleCompletedDeletion(grandTargetId, projectName, grandTargetName)
+  }
+  
+  else {
     handleDefaultViewDeletion(currentArray, itemIndex, itemName);
   }
   updateUI(); // update number counts
@@ -108,6 +115,15 @@ function handleTodayViewDeletion(grandTargetId, projectName, grandTargetName) {
   deleteItemByIndex(grandTargetId, grandArray); // delete item from grandArray
   saveDataToLocalStorage();
   displayTodaysList(flag1); //render html
+  updateOtherLists(projectName, grandTargetName); // update other lists to display the true state 
+}
+
+function handleCompletedDeletion(grandTargetId, projectName, grandTargetName) {
+  deleteItemByIndex(grandTargetId, grandArray); // delete item from grandArray
+  const matchingIndex = findIndexByName(completedArray, grandTargetName)
+  deleteItemByIndex(matchingIndex, completedArray) // delete item from completedArray
+  saveDataToLocalStorage()
+  renderCompletedArray()
   updateOtherLists(projectName, grandTargetName); // update other lists to display the true state 
 }
 
