@@ -138,6 +138,11 @@ export function countUpcomingLength () {
   upcomingNum.innerHTML = findUpcomingLength.length
 }
 
+export function countCompletedLength() {
+  const completedNums = document.querySelector('#completed-nums')
+  completedNums.innerHTML = countArrayLength(completedArray)
+}
+
 
 
 //--------------RENDER TODAY/UPCOMING HTML----------------\\
@@ -221,7 +226,7 @@ infoPopupContainer.classList.remove('hidden1')
 export function renderCompletedArray() {
   const displayTasks = document.querySelector('.task-content-box')
   renderLists(displayTasks)
-
+  countCompletedLength()
 }
 
 function renderLists(displayTasks){
@@ -231,10 +236,10 @@ function renderLists(displayTasks){
 
 function createCompletedHTML(item, index){
   return `
-<div><input type="checkbox" class="check-box" data-id2="${item.name}"> ${item.name}</div>
+<div> ${item.name}</div>
 <div>${item.date}</div>
 <div>${item.projectName}</div>
 <div><button class="info-button" data-id="${item.name}">Info</button></div>
-<div><button class='delete-button' id="${index}" data-id1="${item.name}">Delete</button></div>`
+<div><button class='delete-button' id="${index}" data-id1="${item.name}" data-arr='${item.projectName}'>Delete</button></div>`
 
 }

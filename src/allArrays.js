@@ -1,4 +1,4 @@
-import { displayToDoList, sidebarNumberCount, renderSidebar, projectNumberCount, displayTodaysList, countTodayLength, countUpcomingLength } from "./renderHTML"
+import { displayToDoList, sidebarNumberCount, renderSidebar, projectNumberCount, displayTodaysList, countTodayLength, countUpcomingLength, countCompletedLength } from "./renderHTML"
 import { loadArrayStorage, saveList } from "./storage"
 import { flag, flag1 } from "./DOMinterface"
 
@@ -213,6 +213,7 @@ export function addToCompleted(e) {
 
   const MatchingObj = findMatchingItem(checkedDataId)
   compareCheckedClick(MatchingObj, e, checkedDataId)
+  countCompletedLength()
 }
 
 function findMatchingItem(data){
