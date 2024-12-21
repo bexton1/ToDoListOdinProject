@@ -5,8 +5,8 @@ body {
     display: flex;
 }
 
-/* sidebar */
-#add-project {
+
+/* #add-project {
     cursor: pointer;
 }
 
@@ -79,7 +79,184 @@ padding: 10px;
     background-color: blue;
     cursor: pointer;
     margin-right: 10px;
+} */
+
+/* 
+.side-bar-items-project  {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
+
+.side-bar-items-project-heading {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+} */
+
+
+
+
+/*sidebartop */
+.side-bar {
+    width: 18vw;
+    height: 100vh;
+    background-color: rgb(245, 242, 239);
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+    color: rgb(50, 50, 50);
+}
+
+.side-bar-top {
+    margin-top: 50px;
+}
+
+.side-bar-headings {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.image-plus {
+    height: 30px;
+    width: 30px;
+}
+
+.side-bar-items {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 15px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: bold;
+}
+
+/* Hover and Active Effects */
+.side-bar-items:hover {
+    background-color: rgb(230, 230, 230);
+    color: rgb(30, 30, 30);
+    transform: translateX(5px);
+}
+
+.side-bar-items.active {
+    background-color: rgb(210, 210, 255);
+    color: rgb(50, 50, 255);
+}
+
+/* Specific Section Styling */
+.side-bar-items p {
+    margin: 0;
+}
+
+.side-bar-items-heading {
+    font-size: 16px;
+}
+
+.side-bar-middle {
+    margin-top: 100px;
+}
+
+/* Sidebar Customization */
+.side-bar-items p:first-child {
+    font-weight: bold;
+}
+
+.side-bar-items p:last-child {
+    font-size: 14px;
+    color: rgb(100, 100, 100);
+}
+
+/* Hover-specific icons or numbers */
+.side-bar-items p:last-child:hover {
+    color: rgb(30, 30, 30);
+}
+
+
+
+
+
+
+
+/* Sidebar Header for Projects */
+.side-bar-items-project-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 10px 15px;
+    font-weight: bold;
+    font-size: 16px;
+    color: rgb(50, 50, 50);
+}
+
+.add-project {
+    cursor: pointer;
+    padding: 5px;
+    transition: all 0.3s ease;
+}
+
+.add-project:hover {
+    transform: scale(1.1);
+}
+
+.image-plus {
+    height: 25px;
+    width: 25px;
+}
+
+/* Project Items */
+.side-bar-items-project {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 14px;
+    background-color: rgb(245, 242, 239);
+}
+
+.side-bar-items-project:hover {
+    background-color: rgb(230, 230, 230);
+    color: rgb(30, 30, 30);
+    transform: translateX(5px);
+}
+
+.project-num {
+    font-size: 14px;
+    color: rgb(100, 100, 100);
+}
+
+/* Active Project Item */
+.side-bar-items-project.active {
+    background-color: rgb(210, 210, 255);
+    color: rgb(50, 50, 255);
+}
+
+/* Text Styling */
+.side-bar-items-project p {
+    margin: 0;
+}
+
+
+
+
+
+
+
+
 
 /* main-right section */
 
