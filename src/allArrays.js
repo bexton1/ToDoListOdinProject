@@ -25,19 +25,17 @@ export function addToArray() {
 
 function getFormData() {
   const inputName = document.querySelector('#todo-name')
-  const priority = document.querySelector('#priority')
+ 
   const dueDate = document.querySelector('#date')
   const description = document.querySelector('#description')
-
   const name = inputName.value
   const date = dueDate.value
-  const priorityValue = priority.value
   const projectName = getCurrentProjectName()
   const infodescription = description.value
   
   
 
-  return {name, date, priorityValue, projectName, infodescription}
+  return {name, date, projectName, infodescription}
 }
 
 function getCurrentArray() {

@@ -41,7 +41,7 @@ function createTaskHTML(item, index) {
 return `
 <div><input type="checkbox" class="check-box" data-id2="${item.name}"> ${item.name}</div>
 <div>${item.date}</div>
-<div><button>Edit</button></div>
+<div><button class="edit-button">Edit</button></div>
 <div><button class="info-button" data-id="${item.name}">Info</button></div>
 <div><button class='delete-button' id="${index}" data-id1="${item.name}">Delete</button></div>`
 }
@@ -61,17 +61,32 @@ export function popupHtml() {
 }
 
 
+// function renderModulePopupHTML() {
+//   return `
+//     <div class="popup-content">
+//     <h2>Add Project</h2>
+//     <hr>
+//     <input id="project-input"></input>
+//     <button id="add-project-todo">submit</button> 
+//     <button id="close-popup-btn">close</button>
+//   </div>
+//   `
+// }
+
 function renderModulePopupHTML() {
   return `
     <div class="popup-content">
-    <h2>Add Project</h2>
-    <hr>
-    <input id="project-input"></input>
-    <button id="add-project-todo">submit</button> 
-    <button id="close-popup-btn">close</button>
-  </div>
-  `
+      <h2>Add Project</h2>
+      <hr>
+      <input id="project-input" placeholder="Enter project name..." />
+      <div>
+        <button id="add-project-todo">Submit</button>
+        <button id="close-popup-btn">Close</button>
+      </div>
+    </div>
+  `;
 }
+
 
 function showPopup(popupContainer) {
   popupContainer.classList.remove('hidden')
@@ -215,7 +230,7 @@ export function renderInfoPopup(e) {
                 <h1 id="heading-info">${item.projectName}</h1>
                 <p class="info-items">Project: <span class="info-span info-name">${item.name}</span></p>
                 <p class="info-items">Date: <span class="info-span info-date">${item.date}</span></p>
-                <p class="info-items">Description: <span class="info-span info-description">${item.infodescription}</span></p>
+                <p class="info-items">Description:\n<span class="info-span info-description">${item.infodescription}</span></p>
             </div>`
 }
 
