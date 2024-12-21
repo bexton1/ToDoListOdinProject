@@ -1,5 +1,5 @@
 import { closeProjectModule, sidebarProjectsListeners, toggleProject, flag, attachDeleteListeners, toggleInfo, closeInfoModule } from "./DOMinterface";
-import { todoArray, countArrayLength, projectArray, addNewProject, grandArray } from "./allArrays";
+import { todoArray, countArrayLength, projectArray, addNewProject, grandArray, completedArray } from "./allArrays";
 import { filterGrandArrayToday, filterGrandArrayUpcoming } from "./compareDates";
 import myImage from './images/plus.png'
 
@@ -215,4 +215,26 @@ export function renderInfoPopup(e) {
 
   function revealInfoContainer(infoPopupContainer) {
 infoPopupContainer.classList.remove('hidden1')
+}
+
+//--------------RENDER COMPLETED ARRAY----------------\\
+export function renderCompletedArray() {
+  const displayTasks = document.querySelector('.task-content-box')
+  renderLists(displayTasks)
+
+}
+
+function renderLists(displayTasks){
+  const outcome = completedArray.map((item, index) => createCompletedHTML(item, index))
+  displayTasks.innerHTML = outcome.join('')
+}
+
+function createCompletedHTML(item, index){
+  return `
+<div><input type="checkbox" class="check-box" data-id2="${item.name}"> ${item.name}</div>
+<div>${item.date}</div>
+<div>${item.projectName}</div>
+<div><button class="info-button" data-id="${item.name}">Info</button></div>
+<div><button class='delete-button' id="${index}" data-id1="${item.name}">Delete</button></div>`
+
 }

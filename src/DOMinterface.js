@@ -1,6 +1,6 @@
 import { setupEventListeners } from "./pageLoadEventHandlers"
 import { loadInbox } from "./loadhomepage"
-import { displayTodaysList, displayToDoList, popupHtml, renderSidebar, renderInfoPopup} from "./renderHTML"
+import { displayTodaysList, displayToDoList, popupHtml, renderSidebar, renderInfoPopup, renderCompletedArray} from "./renderHTML"
 import { projectArray, spliceRow, addToCompleted } from "./allArrays"
 import { loadTodayAndUpcoming } from "./loadTodayPage"
 
@@ -102,7 +102,9 @@ function findArrayToRender(sidebaritem) {
     else if(sidebaritem === 'Today' || sidebaritem === 'Upcoming') {
         displayTodaysList(sidebaritem)
     }
-
+    else if(sidebaritem === 'Completed') {
+        renderCompletedArray()
+    }
     else {
         displayToDoList() // renders project list by default if the above options arnt valid
     }

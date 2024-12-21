@@ -1,12 +1,14 @@
 import { addToArray } from "./allArrays";
 import { displayToDoList } from "./renderHTML";
 import { checkBoxListener, toggleForm, toggleInfo, toggleProject } from "./DOMinterface";
+import { loadCheckedBoxes } from "./storage";
 
 export function setupEventListeners() {
   setupFormEventListeners();
   toggleProject();
   toggleInfo()
   checkBoxListener()
+  loadCheckedBoxes()
 }
 
 // form submit listener

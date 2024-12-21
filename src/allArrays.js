@@ -236,5 +236,4 @@ function findCompletedIndex(checkedDataId){
 }
 
 
-//--------------CHECKBOX LOCALSTORAGE FUNCTIONALITY----------------\\
 
