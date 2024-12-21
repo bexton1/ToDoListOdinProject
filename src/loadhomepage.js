@@ -2,6 +2,10 @@ import myImage from './images/plus.png'
 
 const mainContainer = document.querySelector('.main-right')
 
+
+
+
+
 export function loadInbox(heading) {
 mainContainer.innerHTML = `    <h2>${heading}</h2>
             <div class="task-content-box "> </div>
@@ -21,12 +25,8 @@ mainContainer.innerHTML = `    <h2>${heading}</h2>
                         <div class='flex-container'>
                         <div>
                          <input type="date" name="" id="date" required>
-                        <select name="" id="priority">
-                            <option value="priority 1">priority 1</option>
-                            <option value="priority 2">priority 2</option>
-                            <option value="priority 3">priority 3</option>
-                        </select>
-                        </div>
+                        
+                        </div>  
                        
                         
                         <div class="task-buttons">

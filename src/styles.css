@@ -264,7 +264,150 @@ padding: 10px;
     margin-left: 20px;
 }
 
-#form {
+
+
+/* Form Container */
+.add-task-module {
+    width: 700px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    display: none; /* Default hidden */
+  }
+  
+  /* Active Class for Visibility */
+  .add-task-module.active {
+    display: block;
+  }
+  
+  /* Form Layout */
+  #form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .flex-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  /* Inputs and Textareas */
+  #todo-name,
+  #description,
+  #date,
+  #priority {
+    width: 97%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+    background-color: #f9f9f9;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  #todo-name {
+    height: 30px;
+  }
+  
+  #description {
+    resize: vertical;
+    min-height: 90px;
+  }
+  
+  #date,
+  #priority {
+    height: 34px;
+  }
+  
+  /* Focus States */
+  #todo-name:focus,
+  #description:focus,
+  #date:focus,
+  #priority:focus {
+    border-color: #4caf50;
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.4);
+    outline: none;
+  }
+  
+  /* Buttons */
+  .task-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+  }
+  
+  .btn {
+    padding: 10px 20px;
+    font-size: 14px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .btn-cancel {
+    background-color: #f44336;
+    color: white;
+  }
+  
+  .btn-cancel:hover {
+    background-color: #d32f2f;
+    transform: scale(1.05);
+  }
+  
+  .btn-submit {
+    background-color: #4caf50;
+    color: white;
+  }
+  
+  .btn-submit:hover {
+    background-color: #388e3c;
+    transform: scale(1.05);
+  }
+  
+  /* Add New Task */
+  .add-new-task {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+  
+  .add-new-task:hover {
+    background-color: #f9f9f9;
+    border-radius: 6px;
+  }
+  
+  /* Task Content List */
+  .task-content-list,
+  .task-content-box {
+    display: grid;
+    grid-template-columns: 200px 200px 200px 200px 200px;
+    column-gap: 10px;
+    row-gap: 10px;
+    align-items: center;
+  }
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* #form {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -335,7 +478,7 @@ cursor: pointer;
     row-gap: 10px;
     align-items: center;
     
-}
+} */
 
 /* popup styles */
 

@@ -41,7 +41,7 @@ function createTaskHTML(item, index) {
 return `
 <div><input type="checkbox" class="check-box" data-id2="${item.name}"> ${item.name}</div>
 <div>${item.date}</div>
-<div>${item.priorityValue}</div>
+<div><button>Edit</button></div>
 <div><button class="info-button" data-id="${item.name}">Info</button></div>
 <div><button class='delete-button' id="${index}" data-id1="${item.name}">Delete</button></div>`
 }
