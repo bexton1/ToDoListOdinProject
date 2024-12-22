@@ -249,3 +249,46 @@ function createCompletedHTML(item, index){
 <div><button class='delete-button' id="${index}" data-id="${item.name}" data-arr='${item.projectName}'>Delete</button></div>`
 
 }
+
+
+//--------------RENDER PROJECT-DELETE MODULE----------------\\
+export function projectDeleteModule() {
+  const popupContainer = document.querySelector('.display-project-delete')
+  popupContainer.innerHTML = renderProjectDeleteModule()
+  
+  showDeletePopup(popupContainer)
+
+  closeProjectDeleteModule(popupContainer)// event listener for closing module
+  deleteProjectModule(popupContainer) //event listener for deleting project
+  
+}
+
+function renderProjectDeleteModule() {
+  return `
+    <div class="popup-content">
+      <h2>Are you sure you want to Delete this project?</h2>
+      <hr>
+      
+      <div>
+        <button id="add-project-todo">Delete</button>
+        <button id="close-popup-btn" class="project-delete-click">Close</button>
+      </div>
+    </div>
+  `;
+}
+
+function showDeletePopup(popupContainer) {
+  popupContainer.classList.remove('hidden2')
+}
+
+function closeProjectDeleteModule(popupContainer) {
+ const closeButton = document.querySelector('.project-delete-click')
+ closeButton.addEventListener('click', () => {
+  popupContainer.classList.add('hidden2')
+
+ })
+}
+
+function deleteProjectModule(popupContainer) {
+
+}

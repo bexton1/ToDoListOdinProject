@@ -174,7 +174,13 @@ body {
   
 }
 
-
+.delete-active {
+  color: white;
+  background-color: red;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+}
 
 
 
@@ -389,7 +395,7 @@ body {
 
 
 /* Background Overlay */
-.popup {
+.popup, .display-project-delete{
     position: fixed;
     top: 0;
     left: 0;
@@ -400,6 +406,10 @@ body {
     justify-content: center;
     align-items: center;
     z-index: 1000;
+  }
+
+  .hidden2 {
+    display: none;
   }
   
   /* Hidden Class */

@@ -1,6 +1,6 @@
 import { setupEventListeners } from "./pageLoadEventHandlers"
 import { loadInbox } from "./loadhomepage"
-import { displayTodaysList, displayToDoList, popupHtml, renderSidebar, renderInfoPopup, renderCompletedArray, projectNumberCount} from "./renderHTML"
+import { displayTodaysList, displayToDoList, popupHtml, renderSidebar, renderInfoPopup, renderCompletedArray, projectNumberCount, projectDeleteModule} from "./renderHTML"
 import { projectArray, spliceRow, addToCompleted } from "./allArrays"
 import { loadTodayAndUpcoming } from "./loadTodayPage"
 
@@ -178,14 +178,38 @@ function createHoverListeners(allProjects, allNums) {
         const projectNumEl = item.querySelector('.project-num')
         const originalCount = projectNumEl.textContent
 
-        item.addEventListener('mouseover', () => {
-          projectNumEl.innerHTML = '10'
+        item.addEventListener('mouseenter', () => {
+            const projectNumEl = item.querySelector('.project-num')
+            projectNumEl.innerHTML = ""
+
+            projectNumEl.appendChild(createProjectDeleteButton())
+            projectDeletePopup() // add event listener to display popup for deleting projects
 
         })
 
-        item.addEventListener('mouseout', () => {
-          const projectNumEl = item.querySelector('.project-num')
-            projectNumEl.innerHTML = originalCount
+        item.addEventListener('mouseleave', () => {
+          projectNumEl.innerHTML = originalCount
+        })
+    })
+}
+
+function createProjectDeleteButton() {
+    const deleteButton = document.createElement('button')
+    deleteButton.innerHTML = 'X'
+    deleteButton.className = 'delete-active'
+    return deleteButton
+}
+
+//-------------- PROJECT DELETE BUTTON POPUP LISTENER----------------\\\
+function projectDeletePopup() {
+    const DeleteButtonQuery = document.querySelectorAll('.delete-active')
+    addListenerPopupDeleteProject(DeleteButtonQuery)
+}
+
+function addListenerPopupDeleteProject(DeleteButtonQuery) {
+    DeleteButtonQuery.forEach((item) => {
+        item.addEventListener('click', () => {
+            projectDeleteModule()
         })
     })
 }
