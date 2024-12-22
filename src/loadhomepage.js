@@ -22,7 +22,7 @@ mainContainer.innerHTML = `    <h2>${heading}</h2>
                     <form id="form">
                         <input type="text" name="" id="todo-name" placeholder="ToDo Name" required>
                         <textarea name="" id="description" placeholder="description"></textarea>
-                        <div class='flex-container'>
+                    <div class='flex-container'>
                         <div>
                          <input type="date" name="" id="date" required>
                         
@@ -33,8 +33,8 @@ mainContainer.innerHTML = `    <h2>${heading}</h2>
                             <button id="cancel-form" type="button">Cancel</button>
                             <button id="submit-form" type="submit">Submit</button>
                         </div>
-                        </div>
-                     </form>
+                    </div>
+                </form>
                    
                 </div>
             `
