@@ -70,7 +70,7 @@ return currentTarget
 }
 
 // Function to reset any global states or flags
-function resetState() {
+export function resetState() {
     flag = null;
 }
 
@@ -129,11 +129,17 @@ function attachProjectListeners(projectItems) {
 
 // Function to handle the click event for a project
 function handleProjectClick(event) {
+    // Prevent triggering if the click originated from the delete button
+    if (event.target.classList.contains('delete-active')) {
+        return; // Stop execution for clicks on the delete button
+    }
+
     const projectId = getProjectIdFromEvent(event);
     updateCurrentProjectFlag(projectId);
     loadInbox(projectId);
     initializeUIComponents(projectId)
     flag1 = null
+
 }
 
 // Helper function to extract the project ID from the event
@@ -169,29 +175,35 @@ export function attachDeleteListeners () {
 //--------------DELETE BUTTON FOR PROJECTS ON HOVER----------------\\\
 export function displayDeleteButton(){
     const allProjects = document.querySelectorAll('.side-bar-items-project')
-    const allNums = document.querySelectorAll('.project-num')
-    createHoverListeners(allProjects, allNums)
+
+    createHoverListeners(allProjects)
 }
 
-function createHoverListeners(allProjects, allNums) {
-    allProjects.forEach((item) => {
-        const projectNumEl = item.querySelector('.project-num')
-        const originalCount = projectNumEl.textContent
+function createHoverListeners(allProjects) {
+    allProjects.forEach((item, index) => {
+        const dataId = item.dataset.id
+        const projectNumEl = item.querySelector('.project-num');
+        const originalCount = projectNumEl.textContent;
 
         item.addEventListener('mouseenter', () => {
-            const projectNumEl = item.querySelector('.project-num')
-            projectNumEl.innerHTML = ""
+            projectNumEl.innerHTML = ""; // Clear existing content
+            const deleteButton = createProjectDeleteButton();
+            projectNumEl.appendChild(deleteButton); // Append delete button
 
-            projectNumEl.appendChild(createProjectDeleteButton())
-            projectDeletePopup() // add event listener to display popup for deleting projects
-
-        })
+            // Add event listener to delete button for popup
+            deleteButton.addEventListener('click', (e) => {
+                e.stopPropagation(); // Prevent triggering other events
+                projectDeleteModule(dataId, index); // Display delete popup
+                
+            });
+        });
 
         item.addEventListener('mouseleave', () => {
-          projectNumEl.innerHTML = originalCount
-        })
-    })
+            projectNumEl.innerHTML = originalCount; // Restore original count
+        });
+    });
 }
+
 
 function createProjectDeleteButton() {
     const deleteButton = document.createElement('button')
@@ -200,16 +212,3 @@ function createProjectDeleteButton() {
     return deleteButton
 }
 
-//-------------- PROJECT DELETE BUTTON POPUP LISTENER----------------\\\
-function projectDeletePopup() {
-    const DeleteButtonQuery = document.querySelectorAll('.delete-active')
-    addListenerPopupDeleteProject(DeleteButtonQuery)
-}
-
-function addListenerPopupDeleteProject(DeleteButtonQuery) {
-    DeleteButtonQuery.forEach((item) => {
-        item.addEventListener('click', () => {
-            projectDeleteModule()
-        })
-    })
-}

@@ -1,6 +1,7 @@
 import { displayToDoList, sidebarNumberCount, renderSidebar, projectNumberCount, displayTodaysList, countTodayLength, countUpcomingLength, countCompletedLength, renderCompletedArray } from "./renderHTML"
 import { loadArrayStorage, saveList } from "./storage"
-import { flag, flag1 } from "./DOMinterface"
+import {  resetState, flag, flag1  } from "./DOMinterface"
+import { loadInbox } from "./loadhomepage"
 
 
 
@@ -13,6 +14,7 @@ export let storedCheckboxArray = loadArrayStorage('storedCheckboxArray')
 
 //--------------ADD TODO SUBMISSION DATA TO SPECIFIC ARRAY----------------\\
 export function addToArray() {
+  
   const formData = getFormData()
   const currentArray = getCurrentArray()
   
@@ -250,5 +252,36 @@ function findCompletedIndex(checkedDataId){
   return completedArray.findIndex((item) => item.name === checkedDataId )
 }
 
+//--------------DELETE FROM PROJECT ARRAY AND GRANDARRAY----------------\\
 
+export function deleteProjectModule(dataId, index, popupContainer) {
+  const deleteButton = document.querySelector('.project-delete-click')
+  deleteButton.addEventListener('click', () => {
+    deleteFromProjectArrays(index)
+    deleteFromBigDaddyArray(dataId)
+    popupContainer.classList.add('hidden2')
+    loadHomePage()
+
+  })
+  }
+  
+  function deleteFromProjectArrays(index) {
+    projectArray.splice(index, 1)
+    renderSidebar()
+    saveList('projectArray', projectArray)
+  }
+  
+  function deleteFromBigDaddyArray(dataId) {
+    const findIndex = grandArray.findIndex((item) => item.projectName === dataId)
+    grandArray.splice(findIndex, 1)
+    saveList('grandArray', grandArray)
+    countUpcomingLength()
+    countTodayLength()
+  }
+
+  function loadHomePage() {
+    loadInbox('Inbox')
+    resetState() // set flag back to default.. ready to display default(inbox) list
+    displayToDoList()
+  }
 

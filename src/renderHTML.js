@@ -1,8 +1,8 @@
-import { closeProjectModule, sidebarProjectsListeners, toggleProject, flag, attachDeleteListeners, toggleInfo, closeInfoModule, checkBoxListener } from "./DOMinterface";
-import { todoArray, countArrayLength, projectArray, addNewProject, grandArray, completedArray } from "./allArrays";
+import { closeProjectModule, sidebarProjectsListeners, toggleProject, flag, attachDeleteListeners, toggleInfo, closeInfoModule, checkBoxListener, displayDeleteButton } from "./DOMinterface";
+import { todoArray, countArrayLength, projectArray, addNewProject, grandArray, completedArray, deleteProjectModule } from "./allArrays";
 import { filterGrandArrayToday, filterGrandArrayUpcoming } from "./compareDates";
 import myImage from './images/plus.png'
-import { loadCheckedBoxes } from "./storage";
+import { loadCheckedBoxes, saveList } from "./storage";
 
 
 
@@ -58,6 +58,7 @@ export function popupHtml() {
 
   closeProjectModule(popupContainer)// event listener for closing module
   addNewProject(popupContainer) // event listener for adding a new project 
+  displayDeleteButton() // event listeners for hover activated delete buttons
 }
 
 function renderModulePopupHTML() {
@@ -112,6 +113,7 @@ function initializeSidebarFeatures() {
   toggleProject(); // re-add listener for toggling projects
   sidebarProjectsListeners(); // attach listeners for loading projects individual page
   projectNumberCount(); //update project count display
+  displayDeleteButton()
 }
 
 
@@ -252,14 +254,14 @@ function createCompletedHTML(item, index){
 
 
 //--------------RENDER PROJECT-DELETE MODULE----------------\\
-export function projectDeleteModule() {
+export function projectDeleteModule(dataId, index) {
   const popupContainer = document.querySelector('.display-project-delete')
   popupContainer.innerHTML = renderProjectDeleteModule()
   
   showDeletePopup(popupContainer)
 
   closeProjectDeleteModule(popupContainer)// event listener for closing module
-  deleteProjectModule(popupContainer) //event listener for deleting project
+  deleteProjectModule(dataId, index, popupContainer) //event listener for deleting project
   
 }
 
@@ -270,8 +272,8 @@ function renderProjectDeleteModule() {
       <hr>
       
       <div>
-        <button id="add-project-todo">Delete</button>
-        <button id="close-popup-btn" class="project-delete-click">Close</button>
+        <button id="add-project-todo" class="project-delete-click">Delete</button>
+        <button id="close-popup-btn" class="project-close-click">Close</button>
       </div>
     </div>
   `;
@@ -282,13 +284,10 @@ function showDeletePopup(popupContainer) {
 }
 
 function closeProjectDeleteModule(popupContainer) {
- const closeButton = document.querySelector('.project-delete-click')
+ const closeButton = document.querySelector('.project-close-click')
  closeButton.addEventListener('click', () => {
   popupContainer.classList.add('hidden2')
 
  })
 }
 
-function deleteProjectModule(popupContainer) {
-
-}
