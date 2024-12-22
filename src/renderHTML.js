@@ -60,19 +60,6 @@ export function popupHtml() {
   addNewProject(popupContainer) // event listener for adding a new project 
 }
 
-
-// function renderModulePopupHTML() {
-//   return `
-//     <div class="popup-content">
-//     <h2>Add Project</h2>
-//     <hr>
-//     <input id="project-input"></input>
-//     <button id="add-project-todo">submit</button> 
-//     <button id="close-popup-btn">close</button>
-//   </div>
-//   `
-// }
-
 function renderModulePopupHTML() {
   return `
     <div class="popup-content">

@@ -1,6 +1,6 @@
 import { setupEventListeners } from "./pageLoadEventHandlers"
 import { loadInbox } from "./loadhomepage"
-import { displayTodaysList, displayToDoList, popupHtml, renderSidebar, renderInfoPopup, renderCompletedArray} from "./renderHTML"
+import { displayTodaysList, displayToDoList, popupHtml, renderSidebar, renderInfoPopup, renderCompletedArray, projectNumberCount} from "./renderHTML"
 import { projectArray, spliceRow, addToCompleted } from "./allArrays"
 import { loadTodayAndUpcoming } from "./loadTodayPage"
 
@@ -162,6 +162,30 @@ export function attachDeleteListeners () {
     checkBox.forEach((item) => {
         item.addEventListener('change', (e) => {
             addToCompleted(e)
+        })
+    })
+}
+
+//--------------DELETE BUTTON FOR PROJECTS ON HOVER----------------\\\
+export function displayDeleteButton(){
+    const allProjects = document.querySelectorAll('.side-bar-items-project')
+    const allNums = document.querySelectorAll('.project-num')
+    createHoverListeners(allProjects, allNums)
+}
+
+function createHoverListeners(allProjects, allNums) {
+    allProjects.forEach((item) => {
+        const projectNumEl = item.querySelector('.project-num')
+        const originalCount = projectNumEl.textContent
+
+        item.addEventListener('mouseover', () => {
+          projectNumEl.innerHTML = '10'
+
+        })
+
+        item.addEventListener('mouseout', () => {
+          const projectNumEl = item.querySelector('.project-num')
+            projectNumEl.innerHTML = originalCount
         })
     })
 }

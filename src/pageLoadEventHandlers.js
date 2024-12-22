@@ -1,6 +1,6 @@
 import { addToArray } from "./allArrays";
 import { countCompletedLength, displayToDoList } from "./renderHTML";
-import { checkBoxListener, toggleForm, toggleInfo, toggleProject } from "./DOMinterface";
+import { checkBoxListener, displayDeleteButton, toggleForm, toggleInfo, toggleProject } from "./DOMinterface";
 import { loadCheckedBoxes } from "./storage";
 
 export function setupEventListeners() {
@@ -10,6 +10,7 @@ export function setupEventListeners() {
   //checkBoxListener()
   loadCheckedBoxes()
   countCompletedLength()
+  displayDeleteButton()
 }
 
 // form submit listener
