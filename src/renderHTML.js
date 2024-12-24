@@ -1,5 +1,5 @@
 import { closeProjectModule, sidebarProjectsListeners, toggleProject, flag, attachDeleteListeners, toggleInfo, closeInfoModule, checkBoxListener, displayDeleteButton, displayFormEdit } from "./DOMinterface";
-import { todoArray, countArrayLength, projectArray, addNewProject, grandArray, completedArray, deleteProjectModule } from "./allArrays";
+import { todoArray, countArrayLength, projectArray, addNewProject, grandArray, completedArray, deleteProjectModule, setEditFlag } from "./allArrays";
 import { filterGrandArrayToday, filterGrandArrayUpcoming } from "./compareDates";
 import myImage from './images/plus.png'
 import { loadCheckedBoxes, saveList } from "./storage";
@@ -18,6 +18,7 @@ export function displayToDoList() {
   loadCheckedBoxes()
   checkBoxListener()
   displayFormEdit()
+  setEditFlag(null)
 }
 
 // render tasks to DOM

@@ -1,8 +1,7 @@
 import { displayToDoList, sidebarNumberCount, renderSidebar, projectNumberCount, displayTodaysList, countTodayLength, countUpcomingLength, countCompletedLength, renderCompletedArray } from "./renderHTML"
 import { loadArrayStorage, saveList } from "./storage"
-import {  resetState, flag, flag1  } from "./DOMinterface"
+import {  resetState, flag, flag1, editArrayData  } from "./DOMinterface"
 import { loadInbox } from "./loadhomepage"
-
 
 
 export let todoArray = loadArrayStorage('todoArray')
@@ -10,6 +9,18 @@ export let projectArray = loadArrayStorage('projectArray')
 export let grandArray = loadArrayStorage('grandArray')
 export let completedArray = loadArrayStorage('completedArray')
 export let storedCheckboxArray = loadArrayStorage('storedCheckboxArray')
+
+
+
+ let editFlag = null
+
+export function setEditFlag(value) {
+  editFlag = value; // Update the value
+}
+
+export function getEditFlag() {
+  return editFlag; // Access the value
+}
 
 
 //--------------ADD TODO SUBMISSION DATA TO SPECIFIC ARRAY----------------\\
@@ -45,10 +56,15 @@ function getCurrentArray() {
 }
 
 function pushFormDataToArray(formData, currentArray) {
-currentArray.push(formData)
-grandArray.push(formData)
-
+  if(editFlag === null) {
+    currentArray.push(formData)
+    grandArray.push(formData)
+  } else {
+      editArrayData()
+  }
 }
+
+
 
 function saveDataToLocalStorage() {
   saveList('todoArray', todoArray);
@@ -80,6 +96,7 @@ return 'Inbox'
     return projectArray[flag].projectName
   }
 }
+
 
 
 //--------------DELETE FROM RELEVANT LIST AND UPDATE CORRECT STATE IN ALL ARRAYS----------------\\

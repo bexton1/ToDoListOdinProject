@@ -1,7 +1,7 @@
 import { setupEventListeners } from "./pageLoadEventHandlers"
 import { loadInbox } from "./loadhomepage"
 import { displayTodaysList, displayToDoList, popupHtml, renderSidebar, renderInfoPopup, renderCompletedArray, projectNumberCount, projectDeleteModule} from "./renderHTML"
-import { projectArray, spliceRow, addToCompleted,todoArray } from "./allArrays"
+import { projectArray, spliceRow, addToCompleted,todoArray, setEditFlag, getEditFlag, grandArray } from "./allArrays"
 import { loadTodayAndUpcoming } from "./loadTodayPage"
 
 export let flag = null
@@ -214,9 +214,12 @@ function createProjectDeleteButton() {
 
 
 //--------------TOGGLE EDIT FORM----------------\\\
+let currentName;
+
 export function displayFormEdit() {
     const editButton = document.querySelectorAll('.edit-button')
     editButtonClick(editButton)
+    
     
 }
 
@@ -224,6 +227,7 @@ export function displayFormEdit() {
 function editButtonClick(editButton) {
     editButton.forEach((item) => {
         item.addEventListener('click', (e) => {
+            setEditFlag(item.dataset.id3)
             const infoIndex = item.dataset.id3
             activateForm()
             const currentArray = getCurrentArray()
@@ -261,8 +265,55 @@ function getFormValues(currentArray, infoIndex) {
 
      const description = document.querySelector('#description')
      description.value = currentArray[infoIndex].infodescription
+
+     currentName = inputName.value
     
   }
+
+
+  //--------------EDIT ARRAY DATA----------------\\
+
+
+export function editArrayData() {
+    const currentArray = getCurrentArray()
+    const arrayIndex = getEditFlag()
+    const formEditValues = formValues()
+
+    replaceArrayData(currentArray, arrayIndex, formEditValues)
+}
+
+function formValues() {
+    const inputName = document.querySelector('#todo-name')
+    const dueDate = document.querySelector('#date')
+    const description = document.querySelector('#description')
+    
+    
+
+    return {inputName, dueDate, description}
+}
+
+function replaceArrayData(currentArray, arrayIndex, formEditValues) {
+    const grandIndex = findNameInGrand()
+
+    grandArray[grandIndex].name = formEditValues.inputName.value
+grandArray[grandIndex].date = formEditValues.dueDate.value
+grandArray[grandIndex].infodescription = formEditValues.description.value
+
+currentArray[arrayIndex].name = formEditValues.inputName.value
+currentArray[arrayIndex].date = formEditValues.dueDate.value
+currentArray[arrayIndex].infodescription = formEditValues.description.value
+}
+
+  //--------------EDIT GRAND ARRAY DATA----------------\\
+    
+
+     function findNameInGrand() {
+        
+        const grandId = grandArray.findIndex((item)=>item.name === currentName)
+        return grandId
+     }
+
+
 
   // create a flag that triggers when the edit button is clicked
   // the outcome of clicking the submit form button will be dependent on the value of the flag
