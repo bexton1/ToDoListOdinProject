@@ -1,4 +1,4 @@
-import { closeProjectModule, sidebarProjectsListeners, toggleProject, flag, attachDeleteListeners, toggleInfo, closeInfoModule, checkBoxListener, displayDeleteButton } from "./DOMinterface";
+import { closeProjectModule, sidebarProjectsListeners, toggleProject, flag, attachDeleteListeners, toggleInfo, closeInfoModule, checkBoxListener, displayDeleteButton, displayFormEdit } from "./DOMinterface";
 import { todoArray, countArrayLength, projectArray, addNewProject, grandArray, completedArray, deleteProjectModule } from "./allArrays";
 import { filterGrandArrayToday, filterGrandArrayUpcoming } from "./compareDates";
 import myImage from './images/plus.png'
@@ -12,10 +12,12 @@ export function displayToDoList() {
   const tasks = getTasksToDisplay()
 
   renderTasks(displayTasks, tasks)
+
   attachDeleteListeners() // reattach event listeners after rendering html
   toggleInfo() //reattach info listener
   loadCheckedBoxes()
   checkBoxListener()
+  displayFormEdit()
 }
 
 // render tasks to DOM
@@ -41,7 +43,7 @@ function createTaskHTML(item, index) {
 return `
 <div><input type="checkbox" class="check-box" data-id2="${item.name}"> ${item.name}</div>
 <div>${item.date}</div>
-<div><button class="edit-button">Edit</button></div>
+<div><button class="edit-button" data-id3 ="${index}">Edit</button></div>
 <div><button class="info-button" data-id="${item.name}">Info</button></div>
 <div><button class='delete-button' id="${index}" data-id1="${item.name}">Delete</button></div>`
 }

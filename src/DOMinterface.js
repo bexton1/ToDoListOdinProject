@@ -1,7 +1,7 @@
 import { setupEventListeners } from "./pageLoadEventHandlers"
 import { loadInbox } from "./loadhomepage"
 import { displayTodaysList, displayToDoList, popupHtml, renderSidebar, renderInfoPopup, renderCompletedArray, projectNumberCount, projectDeleteModule} from "./renderHTML"
-import { projectArray, spliceRow, addToCompleted } from "./allArrays"
+import { projectArray, spliceRow, addToCompleted,todoArray } from "./allArrays"
 import { loadTodayAndUpcoming } from "./loadTodayPage"
 
 export let flag = null
@@ -212,3 +212,59 @@ function createProjectDeleteButton() {
     return deleteButton
 }
 
+
+//--------------TOGGLE EDIT FORM----------------\\\
+export function displayFormEdit() {
+    const editButton = document.querySelectorAll('.edit-button')
+    editButtonClick(editButton)
+    
+}
+
+
+function editButtonClick(editButton) {
+    editButton.forEach((item) => {
+        item.addEventListener('click', (e) => {
+            const infoIndex = item.dataset.id3
+            activateForm()
+            const currentArray = getCurrentArray()
+            getFormValues(currentArray, infoIndex)
+        })
+    })
+   
+}
+
+function activateForm() {
+     const displayForms = document.querySelector('.add-task-module')
+
+     displayForms.classList.remove('active')
+    
+}
+
+
+//Fetch tasks based on condition (flag)
+function getCurrentArray() { 
+  if(flag === null){
+    return todoArray
+  }
+  else {
+    return projectArray[flag].projectArr
+  }
+}
+
+
+function getFormValues(currentArray, infoIndex) {
+    const inputName = document.querySelector('#todo-name')
+    inputName.value = currentArray[infoIndex].name
+   
+     const dueDate = document.querySelector('#date')
+    dueDate.value = currentArray[infoIndex].date
+
+     const description = document.querySelector('#description')
+     description.value = currentArray[infoIndex].infodescription
+    
+  }
+
+  // create a flag that triggers when the edit button is clicked
+  // the outcome of clicking the submit form button will be dependent on the value of the flag
+  // it either logs a new task as normal or it edits the task in question
+  // change values of current array and grandarray --.replace? 
