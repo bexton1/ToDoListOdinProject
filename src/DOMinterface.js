@@ -1,7 +1,7 @@
 import { setupEventListeners } from "./pageLoadEventHandlers"
 import { loadInbox } from "./loadhomepage"
 import { displayTodaysList, displayToDoList, popupHtml, renderSidebar, renderInfoPopup, renderCompletedArray, projectNumberCount, projectDeleteModule} from "./renderHTML"
-import { projectArray, spliceRow, addToCompleted,todoArray, setEditFlag, getEditFlag, grandArray } from "./allArrays"
+import { projectArray, spliceRow, addToCompleted,todoArray, setEditFlag, getEditFlag, grandArray, resetForm } from "./allArrays"
 import { loadTodayAndUpcoming } from "./loadTodayPage"
 
 export let flag = null
@@ -11,6 +11,7 @@ export let flag1 =  null
 //--------------toggle / popup event listeners----------------\\
 export function toggleForm(queryName) {
 queryName.classList.toggle('active')
+resetForm()
 }
 
 export function toggleProject(){
@@ -314,8 +315,3 @@ currentArray[arrayIndex].infodescription = formEditValues.description.value
      }
 
 
-
-  // create a flag that triggers when the edit button is clicked
-  // the outcome of clicking the submit form button will be dependent on the value of the flag
-  // it either logs a new task as normal or it edits the task in question
-  // change values of current array and grandarray --.replace? 

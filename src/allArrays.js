@@ -74,7 +74,7 @@ function saveDataToLocalStorage() {
 
 }
 
-function resetForm() {
+export function resetForm() {
   document.querySelector('#todo-name').value = '';
   document.querySelector('#description').value = '';
   document.querySelector('#date').value = '';
