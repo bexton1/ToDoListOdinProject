@@ -24,3 +24,4 @@ export function filterGrandArrayUpcoming() {
 
     })
 }
+console.log('test')
